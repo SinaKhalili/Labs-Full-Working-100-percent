@@ -1,19 +1,3 @@
-#include<stdio.h>
-int main( void )
-{
-  unsigned int a[0] = {};
-  unsigned int b[0] = {};
-
-  if( scrambled( a, b, 0 ) == 1 )
-  {
-     printf( "b is a scrambled version of a\n" );
-  } else {
-     printf( "b has different contents to a\n" );
-  }
-
-  return 0;
-}
-
 int scrambled( unsigned int a[], unsigned int b[], unsigned int len ){
     int i = 0;
     int o = 0;
