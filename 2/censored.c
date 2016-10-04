@@ -19,7 +19,6 @@ int main(int argc, char* argv[]) {
 
         if(!((c > 64 && c<91)||(c > 96 && c<123)||(c == 39))){
           if ((d > 64 && d<91)||(d > 96 && d<123)||(d == 39)){
-            counter++;
             for(counter; counter<128 ; counter++){
               word[counter] = 0;
             }
@@ -36,7 +35,6 @@ int main(int argc, char* argv[]) {
                 }
               }
               i = 0;
-
             }
             //printf("the counter on k, also known as the number of words needed is %d\n", k);
             if(k < argc-1){
