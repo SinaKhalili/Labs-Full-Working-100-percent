@@ -71,6 +71,6 @@ int main(int argc, char* argv[]) {
       d = c;
       c = getchar();
     }
-    printf("%c", d);
+    //printf("%c", d);
   return 0;
 }
