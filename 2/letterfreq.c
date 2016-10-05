@@ -3,9 +3,7 @@
 #include<ctype.h>
 
 int main(){
-
-  printf("Hello\n" );
-
+  
   int c = getchar();
   int letters[26] = {};
   float lettersCounters[26] = {};
