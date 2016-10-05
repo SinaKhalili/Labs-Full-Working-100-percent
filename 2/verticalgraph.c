@@ -12,7 +12,7 @@ int main (){
   }
   int numberOfThings = i-1;
 
-  printf("There are %d number of things in the array\n", numberOfThings);
+  //printf("There are %d number of things in the array\n", numberOfThings);
 
   int k = 0;
   int greatest = 0;
@@ -21,7 +21,7 @@ int main (){
       greatest = a[k];
     }
   }
-  printf("The greatest number is %d\n", greatest );
+  //printf("The greatest number is %d\n", greatest );
 
   k = greatest;
   i = 0;
