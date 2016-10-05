@@ -4,6 +4,8 @@
 
 int main(){
 
+  printf("Hello\n" );
+
   int c = getchar();
   int letters[26] = {};
   float lettersCounters[26] = {};
@@ -18,9 +20,9 @@ int main(){
   i = 0;
   while (c!=EOF){
   if ((c > 64 && c<91)||(c > 96 && c<123)){
-    if(c >= 65 ){
+    if(c < 91 ){
       //printf("the %c character is now", c);
-      toupper(c);
+      c = tolower(c);
       //printf(" a %c\n",c );
     }
     for ( i ; i<26; i++){
@@ -37,14 +39,16 @@ int main(){
   //printf("the totalLetterCount is now %f because I just ate a %c\n", totalLetterCount, c);
   c = getchar();
   }
-
+  float sum = 0.0;
   float freq = 0.0;
   for(i; i<26; i++){
     if (lettersCounters[i]!=0.0000){
       //printf("The number of %c is %f\n", letters[i], lettersCounters[i] );
       //printf("The total character count is %f\n", totalLetterCount );
       freq = lettersCounters[i]/totalLetterCount;
+      sum+=freq;
       printf( "%c %.4f\n", letters[i], freq);
+      //printf("The sum is now %f\n", sum );
     }
   }
 }
