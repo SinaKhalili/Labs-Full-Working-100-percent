@@ -125,7 +125,7 @@ void replace_color(  uint8_t array[],
   int i = 0;
   for (i; i<cols*rows; i++){
     if (array[i] == pre_color){
-      pre_color = post_color+1;
+      array[i] = post_color;
     }
   }
   // your code here
