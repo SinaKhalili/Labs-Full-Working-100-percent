@@ -19,9 +19,9 @@ int main(){
   while (c!=EOF){
   if ((c > 64 && c<91)||(c > 96 && c<123)){
     if(c < '[' ){
-      printf("the %c character is now", c);
+      //printf("the %c character is now", c);
       c += 32;
-      printf(" a %c\n",c );
+      //printf(" a %c\n",c );
     }
     for ( i ; i<26; i++){
       if (letters[i] == c){
