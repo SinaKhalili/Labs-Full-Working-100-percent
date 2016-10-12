@@ -1,0 +1,38 @@
+
+*** These modified files were found in JOE when it aborted on Wed Sep 28 12:29:17 2016
+*** JOE was aborted because the terminal closed
+
+*** File '(Unnamed)'
+/home/khalili/CMPT127-1167-khalili/.git/COMMIT_EDITMSG
+
+*** File '/home/khalili/CMPT127-1167-khalili/.git/COMMIT_EDITMSG'
+this is my submission for contains
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+#
+# Committer: khalili <khalili@asb9838nu-d14.csil.sfu.ca>
+#
+# On branch master
+# Your branch is up-to-date with 'origin/master'.
+#
+# Changes to be committed:
+#	new file:   contains.c
+#
+# Changes not staged for commit:
+#	modified:   main.c
+#	modified:   reverse.c
+#
+# Untracked files:
+#	../1/2t.c~
+#	../1/a.out
+#	../1/hello
+#	../1/t1.c~
+#	../1/t3.c~
+#	../1/t5.c~
+#	../1/t6.c~
+#	../1/t7.c~
+#	../2.tgz
+#	a.out
+#	contains
+#	main.c~
+#
