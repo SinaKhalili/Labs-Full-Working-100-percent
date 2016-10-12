@@ -5,7 +5,6 @@ void reverse( int arr[], unsigned int len ){
     tmp = arr[i];
     arr[i] = arr[len-i-1];
     arr[len-i-1]=tmp;
-
   }
   return;
 }

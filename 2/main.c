@@ -1,5 +1,5 @@
 #include <stdio.h> // for printf()
-
+#include "funcs.h" // for other functions
 int main( void )
 {
   int a = 11;

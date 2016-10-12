@@ -3,7 +3,7 @@
 #include<ctype.h>
 
 int main(){
-  
+
   int c = getchar();
   int letters[26] = {};
   float lettersCounters[26] = {};
@@ -18,10 +18,10 @@ int main(){
   i = 0;
   while (c!=EOF){
   if ((c > 64 && c<91)||(c > 96 && c<123)){
-    if(c < 91 ){
-      //printf("the %c character is now", c);
-      c = tolower(c);
-      //printf(" a %c\n",c );
+    if(c < '[' ){
+      printf("the %c character is now", c);
+      c += 32;
+      printf(" a %c\n",c );
     }
     for ( i ; i<26; i++){
       if (letters[i] == c){
