@@ -199,6 +199,14 @@ int locate_color(  const uint8_t array[],
 		   unsigned int *x,
 		   unsigned int *y )
 {
+  int i = 0;
+  for (i; i<cols*rows; i++){
+    if(array[i]==color){
+      y = i/cols;
+      x = i%(*y*cols);
+      return 1;
+    }
+  }
     // your code here
     return 0;
 }
@@ -208,12 +216,16 @@ int locate_color(  const uint8_t array[],
 
 // Invert the image, so that black becomes white and vice versa, and
 // light shades of grey become the corresponding dark shade.
-void invert( uint8_t array[],
+/*void invert( uint8_t array[],
          unsigned int cols,
          unsigned int rows )
 {
+  int i = 0;
+  for (i; i<cols*rows; i++){
+    if
+  }
     // your code here
-}
+}*/
 
 /* TASK 6 */
 
