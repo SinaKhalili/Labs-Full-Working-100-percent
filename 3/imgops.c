@@ -202,8 +202,8 @@ int locate_color(  const uint8_t array[],
   int i = 0;
   for (i; i<cols*rows; i++){
     if(array[i]==color){
-      y = i/cols;
-      x = i%(*y*cols);
+      *y = i/cols;
+      *x = i%(*y*cols);
       return 1;
     }
   }
