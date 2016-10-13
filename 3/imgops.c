@@ -162,6 +162,27 @@ void flip_vertical( uint8_t array[],
             unsigned int cols,
             unsigned int rows )
 {
+  int counter = 0;
+  int k = (cols*rows) - (counter+1)*cols;
+  int i = 0;
+  int j = counter*cols;
+
+  uint8_t tmp = 0;
+  while(j<k){
+    //printf("Im goin' into the while loop boss\n");
+    i = 0;
+    for(i; i<cols; i++){
+      //printf("Im goin' into the for loop boss\n");
+      tmp = array[j+i];
+      array[j+i] = array[k+i];
+      array[k+i] = tmp;
+    }
+    i=0;
+    counter++;
+    k-=cols;
+    j+=cols;
+  }
+
     // your code here
 }
 
