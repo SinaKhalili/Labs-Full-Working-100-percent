@@ -200,12 +200,24 @@ int locate_color(  const uint8_t array[],
 		   unsigned int *y )
 {
   int i = 0;
+  int columCounter = 0;
+  int counter = 0;
+
   for (i; i<cols*rows; i++){
     if(array[i]==color){
-      *y = i/cols;
-      *x = i%(*y*cols);
+      *y = counter;
+      *x = columCounter;
+      //printf("%d %d\n", counter, columCounter);
       return 1;
     }
+
+    if(columCounter == cols){
+      columCounter = 0;
+      counter++;
+    }
+
+    columCounter++;
+
   }
     // your code here
     return 0;
@@ -222,7 +234,7 @@ void invert( uint8_t array[],
 {
   int i = 0;
   for (i; i<cols*rows; i++){
-    array[i] = 255 - array[i]; 
+    array[i] = 255 - array[i];
   }
     // your code here
 }
