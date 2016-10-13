@@ -255,7 +255,7 @@ void scale_brightness( uint8_t array[],
       array[i] = 255;
     }
     else{
-      array[i]= array[i] * scale_factor;
+      array[i]= round(array[i] * scale_factor);
     }
 
   }
