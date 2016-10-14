@@ -272,15 +272,20 @@ void normalize( uint8_t array[],
         unsigned int cols,
         unsigned int rows )
 {
-  int max = max(array[], cols, rows);
-  int min = min(array[], cols, rows);
+  int i = 0;
+  int greatest = 0;
+  for (i; i<cols*rows; i++){
+    if (array[i]>greatest){
+      greatest = array[i];
+    }
+  }
 
   if (max>255){
 
-    double factor = max;
+    double factor = greatest;
     double number = 255.0;
     factor = number/factor;
-    scale_brightness(array[], cols, rows, factor);
+    scale_brightness(array, cols, rows, factor);
 
     }
 
