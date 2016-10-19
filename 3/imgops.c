@@ -85,7 +85,7 @@ uint8_t min( const uint8_t array[],
 {
   int i = 0;
   int greatest = 500;
-  for(  i ; i<cols*rows; i++ ){
+  for(  i = 0 ; i<cols*rows; i++ ){
   if (array[i] < greatest){
     greatest = array[i];
     }
@@ -103,7 +103,7 @@ uint8_t max( const uint8_t array[],
 {
   int i = 0;
   int greatest = -500;
-  for(  i ; i<cols*rows; i++ ){
+  for(  i = 0 ; i<cols*rows; i++ ){
   if (array[i] > greatest){
     greatest = array[i];
     }
@@ -280,16 +280,28 @@ void normalize( uint8_t array[],
   printf("The difference is %f\n", difference);
   float tmp = 0.0;
 
-  for (i; i<cols*rows; i++){
+  for (i = 0; i<cols*rows; i++){
     if(array[i] == maxPixel){
+        printf("The number %d is now ",  array[i]);
       array[i] = 255;
+        printf("This : %d\n", array[i] );
     }
     else if(array[i] == minPixel){
+        printf("The number %d is now ",  array[i]);
       array[i] = 0;
+        printf("This : %d\n", array[i] );
     }
     else{
+      printf("The number %d is now ",  array[i]);
       tmp = array[i];
-      array[i] = round((tmp/difference)*255);
+      if(tmp<difference){
+        array[i] = round((tmp/difference)*255);
+        printf("This : %d\n", array[i] );
+      }
+      else if(tmp>difference){
+        array[i] = round((difference/tmp)*255);
+        printf("This : %d\n", array[i] );
+      }
     }
   }
     // your code here
