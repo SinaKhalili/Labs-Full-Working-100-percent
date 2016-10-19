@@ -276,12 +276,15 @@ void normalize( uint8_t array[],
   uint8_t minPixel = min(array, cols, rows);
 
   int i = 0;
-  float difference = maxPixel-minPixel;
-  printf("The difference is %f\n", difference);
+  //printf("The difference is %f\n", difference);
   float tmp = 0.0;
 
   for (i = 0; i<cols*rows; i++){
-    if(array[i] == maxPixel){
+
+    tmp = (array[i] - minPixel)/(maxPixel - minPixel);
+    array[i] = round(tmp); 
+
+  /*  if(array[i] == maxPixel){
         printf("The number %d is now ",  array[i]);
       array[i] = 255;
         printf("This : %d\n", array[i] );
@@ -302,7 +305,7 @@ void normalize( uint8_t array[],
         array[i] = round((tmp/maxPixel)*255);
         printf("This : %d\n", array[i] );
       }
-    }
+    }*/
   }
     // your code here
 }
