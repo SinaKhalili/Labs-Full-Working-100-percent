@@ -278,6 +278,9 @@ void normalize( uint8_t array[],
     if (array[i]>greatest){
       greatest = array[i];
     }
+    if(array[i]<0){
+      array[i]=0;
+    }
   }
 
   if (max>255){
@@ -286,8 +289,8 @@ void normalize( uint8_t array[],
     double number = 255.0;
     factor = number/factor;
     scale_brightness(array, cols, rows, factor);
-
     }
+
 
 
     // your code here
