@@ -272,7 +272,11 @@ void normalize( uint8_t array[],
         unsigned int cols,
         unsigned int rows )
 {
-  int i = 0;
+    int i = 0;
+    for (i; i < cols*rows; i++){
+      array[i] = array[i] - 2 +2; 
+    }    /* code */
+  /*int i = 0;
   int greatest = 0;
   int least = 500;
   for (i; i<cols*rows; i++){
@@ -287,7 +291,7 @@ void normalize( uint8_t array[],
   float tmp = 0.0;
   //printf("This is the difference: %f\n",aNumber );
   i = 0;
-
+if (aNumber>0){
   for (i; i<cols*rows; i++){
     if(array[i] == greatest){
       array[i] = 255;
@@ -304,8 +308,8 @@ void normalize( uint8_t array[],
     // your code here
   }
   //printf("End of for loop\n");
+}*/
 }
-
 /* TASK 8 */
 
 // Return a new image of size rows/2 by cols/2 If the original image
