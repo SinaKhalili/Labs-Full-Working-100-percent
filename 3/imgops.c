@@ -272,11 +272,8 @@ void normalize( uint8_t array[],
         unsigned int cols,
         unsigned int rows )
 {
-    int i = 0;
-    for (i; i < cols*rows; i++){
-      array[i] = array[i] - 2 +2; 
-    }    /* code */
-  /*int i = 0;
+        /* code */
+  int i = 0;
   int greatest = 0;
   int least = 500;
   for (i; i<cols*rows; i++){
@@ -295,9 +292,11 @@ if (aNumber>0){
   for (i; i<cols*rows; i++){
     if(array[i] == greatest){
       array[i] = 255;
+      //printf("element changed to max %d\n", array[i] );
     }
     else if (array[i] == least){
       array[i] = 0;
+      //printf("element changed to min %d\n", array[i] );
     }
     else{
       //printf("This is the element before %d\n", array[i] );
@@ -308,7 +307,7 @@ if (aNumber>0){
     // your code here
   }
   //printf("End of for loop\n");
-}*/
+}
 }
 /* TASK 8 */
 
