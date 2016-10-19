@@ -272,43 +272,29 @@ void normalize( uint8_t array[],
         unsigned int cols,
         unsigned int rows )
 {
-        /* code */
+  uint8_t maxPixel = max(array, cols, rows);
+  uint8_t minPixel = min(array, cols, rows);
+
   int i = 0;
-  int greatest = 0;
-  int least = 500;
-  for (i; i<cols*rows; i++){
-    if(array[i]<least){
-      least = array[i];
-    }
-    if(array[i]>greatest){
-      greatest = array[i];
-    }
-  }
-  float aNumber = greatest-least;
+  float difference = maxPixel-minPixel;
+  printf("The difference is %f\n", difference);
   float tmp = 0.0;
-  //printf("This is the difference: %f\n",aNumber );
-  i = 0;
-if (aNumber>0){
+
   for (i; i<cols*rows; i++){
-    if(array[i] == greatest){
+    if(array[i] == maxPixel){
       array[i] = 255;
-      //printf("element changed to max %d\n", array[i] );
     }
-    else if (array[i] == least){
+    else if(array[i] == minPixel){
       array[i] = 0;
-      //printf("element changed to min %d\n", array[i] );
     }
     else{
-      //printf("This is the element before %d\n", array[i] );
       tmp = array[i];
-      array[i] = round((tmp/aNumber)*255);
-      //printf("And after %d\n", array[i] );
+      array[i] = round((tmp/difference)*255);
     }
-    // your code here
   }
-  //printf("End of for loop\n");
+    // your code here
 }
-}
+
 /* TASK 8 */
 
 // Return a new image of size rows/2 by cols/2 If the original image
