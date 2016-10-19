@@ -279,22 +279,31 @@ void normalize( uint8_t array[],
     if(array[i]<least){
       least = array[i];
     }
-  }
-  int aNumber = 0-least;
-  i = 0;
-  for (i; i<cols*rows; i++){
-    array[i] = array[i] + aNumber;
     if(array[i]>greatest){
       greatest = array[i];
     }
   }
-  if (greatest>255){
-    double factor1 = greatest;
-    double number = 255.0;
-    factor1 = number/factor1;
-    scale_brightness(array, cols, rows, factor1);
+  float aNumber = greatest-least;
+  float tmp = 0.0;
+  //printf("This is the difference: %f\n",aNumber );
+  i = 0;
+
+  for (i; i<cols*rows; i++){
+    if(array[i] == greatest){
+      array[i] = 255;
+    }
+    else if (array[i] == least){
+      array[i] = 0;
+    }
+    else{
+      //printf("This is the element before %d\n", array[i] );
+      tmp = array[i];
+      array[i] = round((tmp/aNumber)*255);
+      //printf("And after %d\n", array[i] );
     }
     // your code here
+  }
+  //printf("End of for loop\n");
 }
 
 /* TASK 8 */
