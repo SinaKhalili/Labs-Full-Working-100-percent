@@ -274,25 +274,26 @@ void normalize( uint8_t array[],
 {
   int i = 0;
   int greatest = 0;
+  int least = 500;
   for (i; i<cols*rows; i++){
-    if (array[i]>greatest){
-      greatest = array[i];
-    }
-    if(array[i]<0){
-      array[i]=0;
+    if(array[i]<least){
+      least = array[i];
     }
   }
-
-  if (max>255){
-
-    double factor = greatest;
-    double number = 255.0;
-    factor = number/factor;
-    scale_brightness(array, cols, rows, factor);
+  int aNumber = 0-least;
+  i = 0;
+  for (i; i<cols*rows; i++){
+    array[i] = array[i] + aNumber;
+    if(array[i]>greatest){
+      greatest = array[i];
     }
-
-
-
+  }
+  if (greatest>255){
+    double factor1 = greatest;
+    double number = 255.0;
+    factor1 = number/factor1;
+    scale_brightness(array, cols, rows, factor1);
+    }
     // your code here
 }
 
