@@ -278,12 +278,14 @@ void normalize( uint8_t array[],
   int i = 0;
   //printf("The difference is %f\n", difference);
   float tmp = 0.0;
-
+  float diff = maxPixel-minPixel;
   for (i = 0; i<cols*rows; i++){
+    printf("The number %d was changed to ", array[i]);
+    tmp = (array[i] - minPixel)*(255)/diff;
 
-    tmp = (array[i] - minPixel)/(maxPixel - minPixel);
-    array[i] = round(tmp); 
-
+    printf("Either this %f or ", tmp );
+    array[i] = round(tmp);
+    printf("%d\n", array[i] );
   /*  if(array[i] == maxPixel){
         printf("The number %d is now ",  array[i]);
       array[i] = 255;
