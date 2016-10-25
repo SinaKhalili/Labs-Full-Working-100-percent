@@ -337,8 +337,7 @@ uint8_t* half( const uint8_t array[],
                 array[ (2*y+1) * cols + (2*x+1) ] +
                 array[ (2*y+1) * cols +  2*x ]);
     sum = sum/4.0;
-    y = round(sum);
-    arr[i] = (y);
+    arr[i] = (round(sum));
   }
 
   return arr;
@@ -400,7 +399,7 @@ void region_set( uint8_t array[],
 
           &&  // Checks if it's within x-bounds
 
-         (i/cols) >= bottom  && (i/cols)<top )
+         (i/cols) >= top  && (i/cols)<bottom )
          { //Checks if it's within y-bounds
            array[i] = color;
          }
