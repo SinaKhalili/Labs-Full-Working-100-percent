@@ -376,7 +376,7 @@ uint8_t* half( const uint8_t array[],
 
 // Set every pixel in the region to color. If the region is empty, the
 // image must be unchanged.
-/*void region_set( uint8_t array[],
+void region_set( uint8_t array[],
          unsigned int cols,
          unsigned int rows,
          unsigned int left,
@@ -390,14 +390,25 @@ uint8_t* half( const uint8_t array[],
   }
 
   int i = 0;
+  int indexOfLeft = top*cols + left;
+
 
   for(i = 0; i < cols*rows; i++){
 
-    if(i )
-  }
+    if(i > indexOfLeft){
+      if((i%rows) >= left && ((i%rows) < right)
+
+          &&  // Checks if it's within x-bounds
+
+         (i/cols) >= bottom  && (i/cols)<top )
+         { //Checks if it's within y-bounds
+           array[i] = color;
+         }
+       }
+    }
 
     // your code here
-}*/
+}
 
 /* TASK 10 */
 
