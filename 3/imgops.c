@@ -123,7 +123,7 @@ void replace_color(  uint8_t array[],
 		     uint8_t post_color )
 {
   int i = 0;
-  for (i; i<cols*rows; i++){
+  for (i = 0; i<cols*rows; i++){
     if (array[i] == pre_color){
       array[i] = post_color;
     }
@@ -143,7 +143,7 @@ void flip_horizontal( uint8_t array[],
   int i = 0;
   int j = cols-1;
   uint8_t tmp = 0;
-  for (k ; k < rows; k++){
+  for (k =0 ; k < rows; k++){
     j = (k+1)*cols - 1;
     i = (k)*cols;
     while(i<=j){
@@ -171,7 +171,7 @@ void flip_vertical( uint8_t array[],
   while(j<k){
     //printf("Im goin' into the while loop boss\n");
     i = 0;
-    for(i; i<cols; i++){
+    for(i = 0; i<cols; i++){
       //printf("Im goin' into the for loop boss\n");
       tmp = array[j+i];
       array[j+i] = array[k+i];
@@ -203,7 +203,7 @@ int locate_color(  const uint8_t array[],
   int columCounter = 0;
   int counter = 0;
 
-  for (i; i<cols*rows; i++){
+  for (i = 0 ; i<cols*rows; i++){
     if(array[i]==color){
       *y = counter;
       *x = columCounter;
@@ -233,7 +233,7 @@ void invert( uint8_t array[],
          unsigned int rows )
 {
   int i = 0;
-  for (i; i<cols*rows; i++){
+  for (i = 0; i<cols*rows; i++){
     array[i] = 255 - array[i];
   }
     // your code here
@@ -250,7 +250,7 @@ void scale_brightness( uint8_t array[],
             double scale_factor )
 {
   int i = 0;
-  for (i; i<cols*rows; i++){
+  for (i = 0; i<cols*rows; i++){
     if(array[i]*scale_factor>255){
       array[i] = 255;
     }
@@ -324,6 +324,22 @@ uint8_t* half( const uint8_t array[],
 	       unsigned int cols,
 	       unsigned int rows )
 {
+  uint8_t *arr = malloc((cols/2)*(rows/2)*sizeof(uint8_t));
+  int i = 0;
+  int y = 0;
+  int x = 0;
+  for(i = 0; i<(cols/2)*(rows/2); i++){
+    y = i/cols;
+    x = i % rows;
+    arr[i] = ( (array[  2*y    * cols + (2*x+1) ] +
+                array[  2*y    * cols +  2*x ]    +
+                array[ (2*y+1) * cols + (2*x+1) ] +
+                array[ (2*y+1) * cols +  2*x ])
+                /4  );
+  }
+
+  return arr;
+
   // your code here
   return NULL;
 }
