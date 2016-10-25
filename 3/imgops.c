@@ -328,14 +328,17 @@ uint8_t* half( const uint8_t array[],
   int i = 0;
   int y = 0;
   int x = 0;
+  float sum = 0.0;
   for(i = 0; i<(cols/2)*(rows/2); i++){
     y = i/cols;
     x = i % rows;
-    arr[i] = ( (array[  2*y    * cols + (2*x+1) ] +
+    sum = (     array[  2*y    * cols + (2*x+1) ] +
                 array[  2*y    * cols +  2*x ]    +
                 array[ (2*y+1) * cols + (2*x+1) ] +
-                array[ (2*y+1) * cols +  2*x ])
-                /4  );
+                array[ (2*y+1) * cols +  2*x ]);
+    sum = sum/4.0;
+    y = round(sum);
+    arr[i] = (y);
   }
 
   return arr;
@@ -373,7 +376,7 @@ uint8_t* half( const uint8_t array[],
 
 // Set every pixel in the region to color. If the region is empty, the
 // image must be unchanged.
-void region_set( uint8_t array[],
+/*void region_set( uint8_t array[],
          unsigned int cols,
          unsigned int rows,
          unsigned int left,
@@ -382,8 +385,19 @@ void region_set( uint8_t array[],
          unsigned int bottom,
          uint8_t color )
 {
+  if(right-left * bottom-top  == 0){
+    return;
+  }
+
+  int i = 0;
+
+  for(i = 0; i < cols*rows; i++){
+
+    if(i )
+  }
+
     // your code here
-}
+}*/
 
 /* TASK 10 */
 
