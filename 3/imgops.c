@@ -333,6 +333,9 @@ uint8_t* half( const uint8_t array[],
   float sum = 0.0;
 
   for (i = 0; i< rows/2; i++){
+    if (i*(cols/2) + k == 32){
+      printf("SWAGSWAG YOLO KMS\n");
+    }
     for ( k; k < cols/2; k++ ){
       sum = (     array[  2*i    * cols + (2*k+1) ] +
                   array[  2*i    * cols +  2*k ]    +
