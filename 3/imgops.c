@@ -337,7 +337,9 @@ uint8_t* half( const uint8_t array[],
                 array[ (2*y+1) * cols + (2*x+1) ] +
                 array[ (2*y+1) * cols +  2*x ]);
     sum = sum/4.0;
+    printf("this is the sum: %d \n", sum );
     arr[i] = (round(sum));
+    //printf("Into %d \n", arr[i]);
   }
 
   return arr;
@@ -346,6 +348,21 @@ uint8_t* half( const uint8_t array[],
   return NULL;
 }
 
+void printArray( const uint8_t array[],
+	       unsigned int cols,
+	       unsigned int rows ){
+      int columCounter = 0;
+      int i = 0;
+      for(i=0; i<cols*rows; i++){
+        columCounter++;
+        printf(" %d ", array[i] );
+        if(columCounter == cols){
+          columCounter = 0;
+          printf("\n");
+        }
+      }
+
+}
 
 
 
