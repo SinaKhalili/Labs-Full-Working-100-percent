@@ -328,8 +328,23 @@ uint8_t* half( const uint8_t array[],
   int i = 0;
   int y = 0;
   int x = 0;
+  int k = 0;
+  int klimit = cols/2;
   float sum = 0.0;
-  for(i = 0; i<(cols/2)*(rows/2); i++){
+
+  for (i = 0; i< rows/2; i++){
+    for ( k; k < cols/2; k++ ){
+      sum = (     array[  2*i    * cols + (2*k+1) ] +
+                  array[  2*i    * cols +  2*k ]    +
+                  array[ (2*i+1) * cols + (2*k+1) ] +
+                  array[ (2*i+1) * cols +  2*k ]);
+      sum = sum/4.0;
+      arr[i*(cols/2) + k] = (round(sum));
+    }
+    k+=cols/2;
+    klimit+=cols/2;
+  }
+  /*for(i = 0; i<(cols/2)*(rows/2); i++){
     y = i/cols;
     x = i % rows;
     sum = (     array[  2*y    * cols + (2*x+1) ] +
@@ -340,7 +355,7 @@ uint8_t* half( const uint8_t array[],
     printf("this is the sum: %d \n", sum );
     arr[i] = (round(sum));
     //printf("Into %d \n", arr[i]);
-  }
+  }*/
 
   return arr;
 
