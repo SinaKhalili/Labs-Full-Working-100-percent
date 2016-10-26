@@ -333,10 +333,7 @@ uint8_t* half( const uint8_t array[],
   float sum = 0.0;
 
   for (i = 0; i< rows/2; i++){
-    if (i*(cols/2) + k == 32){
-      printf("SWAGSWAG YOLO KMS\n");
-    }
-    for ( k; k < cols/2; k++ ){
+    for ( k=0; k < cols/2; k++ ){
       sum = (     array[  2*i    * cols + (2*k+1) ] +
                   array[  2*i    * cols +  2*k ]    +
                   array[ (2*i+1) * cols + (2*k+1) ] +
@@ -344,8 +341,6 @@ uint8_t* half( const uint8_t array[],
       sum = sum/4.0;
       arr[i*(cols/2) + k] = (round(sum));
     }
-    k+=cols/2;
-    klimit+=cols/2;
   }
   /*for(i = 0; i<(cols/2)*(rows/2); i++){
     y = i/cols;
