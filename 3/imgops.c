@@ -326,10 +326,10 @@ uint8_t* half( const uint8_t array[],
 {
   uint8_t *arr = malloc((cols/2)*(rows/2)*sizeof(uint8_t));
   int i = 0;
-  int y = 0;
-  int x = 0;
+
+
   int k = 0;
-  int klimit = cols/2;
+
   float sum = 0.0;
 
   for (i = 0; i< rows/2; i++){
@@ -419,22 +419,25 @@ void region_set( uint8_t array[],
   }
 
   int i = 0;
-  int indexOfLeft = top*cols + left;
+  int k = 0;
+  for (i = 0; i< rows/2; i++){
+    for ( k=0; k < cols/2; k++ ){
+      if (left<=k && k<right && i>=top && i< bottom ){
+        array[i*(cols/2) + k] = color;
+      }
 
+    }
+  }
 
-  for(i = 0; i < cols*rows; i++){
-
-    if(i > indexOfLeft){
+  /*for(i = 0; i < cols*rows; i++){
       if((i%rows) >= left && ((i%rows) < right)
-
           &&  // Checks if it's within x-bounds
-
          (i/cols) >= top  && (i/cols)<bottom )
          { //Checks if it's within y-bounds
            array[i] = color;
          }
        }
-    }
+    }*/
 
     // your code here
 }
