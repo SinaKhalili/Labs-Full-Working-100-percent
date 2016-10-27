@@ -455,6 +455,24 @@ unsigned long int region_integrate( const uint8_t array[],
                     unsigned int right,
                     unsigned int bottom )
 {
+  if(right-left * bottom-top  == 0){
+    return 0;
+  }
+
+  int i = 0;
+  int k = 0;
+  long int sum = 0;
+  for (i = 0; i< rows/2; i++){
+    for ( k=0; k < cols/2; k++ ){
+      if (left<=k && k<right && i>=top && i< bottom ){
+        sum += array[i*(cols/2) + k];
+      }
+
+    }
+  }
+
+  return sum;
+
     // your code here
     return 0;
 }
@@ -473,6 +491,25 @@ uint8_t* region_copy( const uint8_t array[],
               unsigned int right,
               unsigned int bottom )
 {
+  uint8_t *newArr = malloc((right-left)*(bottom-top)*sizeof(uint8_t));
+  if(newArr == NULL){
+    return NULL; 
+  }
+  int i = 0;
+  int k = 0;
+  int j = 0;
+  for (i = 0; i< rows/2; i++){
+    for ( k=0; k < cols/2; k++ ){
+      if (left<=k && k<right && i>=top && i< bottom ){
+        newArr[j] = array[i*(cols/2) + k];
+        j++;
+      }
+
+    }
+  }
+
+  return newArr;
+
     // your code here
     return NULL;
 }
