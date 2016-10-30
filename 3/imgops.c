@@ -420,11 +420,15 @@ void region_set( uint8_t array[],
 
   int i = 0;
   int k = 0;
-  for (i = 0; i< rows/2; i++){
-    for ( k=0; k < cols/2; k++ ){
-      if (left<=k && k<right && i>=top && i< bottom ){
-        array[i*(cols/2) + k] = color;
-      }
+  for (i = 0; i< rows; i++){
+    for ( k = 0; k < cols; k++ ){
+      if (k >= left && k <= right-1
+
+        && i>=top && i<= bottom-1 )
+
+        {
+          array[i*(cols) + k] = color;
+        }
 
     }
   }
