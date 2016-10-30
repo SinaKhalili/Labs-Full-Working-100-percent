@@ -22,5 +22,4 @@ void draw_circle( uint8_t img[],
 
             }
           }
-
-      }
+}
