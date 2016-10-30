@@ -9,8 +9,8 @@ void draw_circle( uint8_t img[],
           float Ydistance = 0;
           int a = 0;
           int b = 0;
-          for (b = 0; a<rows; a++){
-            for(a = 0; b<cols; b++){
+          for (b = 0; b<rows; b++){
+            for(a = 0; a<cols; a++){
               Xdistance = abs(a-x);
               Ydistance = abs(b-y);
 
