@@ -95,18 +95,42 @@ int main( int argc, char* argv[] )
   int goofyNumber = min(img, imgwidth, imgheight);
   printf("%d \n", goofyNumber); */
 
-  uint8_t *testArr = half( img,
-  	                       imgwidth,
-  	                       imgheight);
+  //int arrJuan[20] = {};
+
+  draw_circle( img,
+           imgwidth,
+          imgheight,
+           imgwidth/2,
+           imgheight/2,
+           33,
+           4);
+
+/*  draw_rectangle( img,
+           imgwidth,
+          imgheight,
+           imgwidth/2,
+           imgheight/2,
+           -50,
+           -50,
+              0);
+  draw_rectangle( img,
+                  imgwidth,
+                 imgheight,
+                imgwidth/2,
+              imgheight/2,
+             50,
+            50,
+          0);*/
+
 
   // draw the array as a grey-scale image in the window
   // This function returns after a user clicks or presses a button in the window
-  draw_image_grey( testArr, imgwidth, imgheight );
+  draw_image_grey( img, imgwidth, imgheight );
   // finalize the graphics system, freeing its resources
   draw_shutdown();
 
   // every malloc() should have a matching free()
-  free(img);
+  //free(img);
 
 
   return 0;

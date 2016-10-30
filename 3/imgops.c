@@ -428,6 +428,131 @@ void region_set( uint8_t array[],
 
     }
   }
+}
+
+void draw_circle( uint8_t img[],
+                  unsigned int cols,
+                  unsigned int rows,
+		              int x,
+		              int y,
+		              int r,
+		              uint8_t color ){
+          float Xdistance = 0;
+          float Ydistance = 0;
+          int a = 0;
+          int b = 0;
+          for (b = 0; b<rows; b++){
+            for(a = 0; a<cols; a++){
+              Xdistance = abs(a-x);
+              Ydistance = abs(b-y);
+
+              if(
+                  round(sqrt((Xdistance*Xdistance)+(Ydistance*Ydistance))) < r
+              ){
+                img[b*cols + a] = color;
+              }
+
+            }
+          }
+
+}
+void draw_rectangle( uint8_t array[],
+		          unsigned int cols,
+		          unsigned int rows,
+		          int x,
+		          int y,
+		          int rect_width,
+		          int rect_height,
+		          uint8_t color ){
+
+      int i = y;
+      int k = x;
+
+
+      if ( rect_height < 0){
+
+        for(i = y; i>= (rect_height-y); i--){
+
+          array[i*cols+k] = color;
+
+          if(rect_width>0){
+          for (k = x; k < (x + rect_width); k++){
+            if( i == y || i == (y+rect_height)){
+              array[i*cols+k] = color;
+              }
+            }
+          }
+
+          else if(rect_width<0){
+            for (k = x; k > (rect_width-x); k--){
+              if( i == y || i == (rect_height-y)){
+                array[i*cols+k] = color;
+              }
+            }
+          }
+
+
+          array[i*cols+k] = color;
+
+          k=x;
+        }
+
+      }
+      else if ( rect_height > 0 ){
+        for(i = y; i<= (y + rect_height); i++){
+
+          array[i*cols+k] = color;
+
+          if(rect_width>0){
+          for (k = x; k < (x + rect_width); k++){
+            if( i == y || i == (y+rect_height)){
+              array[i*cols+k] = color;
+              }
+            }
+          }
+
+          else if(rect_width<0){
+            for (k = x; k > (rect_width-x); k--){
+              if( i == y || i == (rect_height-y)){
+                array[i*cols+k] = color;
+              }
+            }
+          }
+
+
+          array[i*cols+k] = color;
+
+          k=x;
+        }
+
+      }
+
+
+      /*for(i = y; i<=(y + rect_height); i++){
+
+        array[i*cols+k] = color;
+
+
+        for (k = x; k < (x + rect_width); k++){
+
+          if( i == y || i == (y+rect_height)){
+
+            array[i*cols+k] = color;
+
+          }
+
+        }
+
+
+        array[i*cols+k] = color;
+
+        k=x;
+      }*/
+
+
+
+}
+
 
   /*for(i = 0; i < cols*rows; i++){
       if((i%rows) >= left && ((i%rows) < right)
@@ -440,7 +565,6 @@ void region_set( uint8_t array[],
     }*/
 
     // your code here
-}
 
 /* TASK 10 */
 
@@ -493,7 +617,7 @@ uint8_t* region_copy( const uint8_t array[],
 {
   uint8_t *newArr = malloc((right-left)*(bottom-top)*sizeof(uint8_t));
   if(newArr == NULL){
-    return NULL; 
+    return NULL;
   }
   int i = 0;
   int k = 0;
