@@ -422,19 +422,16 @@ void region_set( uint8_t array[],
   int k = 0;
   for (i = 0; i< rows; i++){
     for ( k = 0; k < cols; k++ ){
-      if (k >= left && k <= right-1
-
-        && i>=top && i<= bottom-1 )
-
+      if (k >= left && k < right
+       && i >= top  && i < bottom )
         {
           array[i*(cols) + k] = color;
         }
-
     }
   }
 }
 
-void draw_circle( uint8_t img[],
+/*void draw_circle( uint8_t img[],
                   unsigned int cols,
                   unsigned int rows,
 		              int x,
@@ -459,8 +456,8 @@ void draw_circle( uint8_t img[],
             }
           }
 
-}
-void draw_rectangle( uint8_t array[],
+}*/
+/*void draw_rectangle( uint8_t array[],
 		          unsigned int cols,
 		          unsigned int rows,
 		          int x,
@@ -468,71 +465,28 @@ void draw_rectangle( uint8_t array[],
 		          int rect_width,
 		          int rect_height,
 		          uint8_t color ){
+      if (rect_height<0 && rect_width<0){
+        //printf("both negatives!\n");
+        x += rect_width;
+        y += rect_height;
+        draw_rectangle(array, cols, rows, x,y, abs(rect_width),abs(rect_height), color );
 
+      }
+      else if (rect_width<0 && rect_height>0){
+        //printf("width negative!\n");
+        x += rect_width;
+        draw_rectangle(array, cols, rows, x,y, abs(rect_width),abs(rect_height), color );
+      }
+      else if (rect_height<0 && rect_width>0){
+        //printf("height negative!\n");
+        y += rect_height;
+        draw_rectangle(array, cols, rows, x,y, abs(rect_width),abs(rect_height), color );
+      }
       int i = y;
       int k = x;
 
-
-      if ( rect_height < 0){
-
-        for(i = y; i>= (rect_height-y); i--){
-
-          array[i*cols+k] = color;
-
-          if(rect_width>0){
-          for (k = x; k < (x + rect_width); k++){
-            if( i == y || i == (y+rect_height)){
-              array[i*cols+k] = color;
-              }
-            }
-          }
-
-          else if(rect_width<0){
-            for (k = x; k > (rect_width-x); k--){
-              if( i == y || i == (rect_height-y)){
-                array[i*cols+k] = color;
-              }
-            }
-          }
-
-
-          array[i*cols+k] = color;
-
-          k=x;
-        }
-
-      }
-      else if ( rect_height > 0 ){
-        for(i = y; i<= (y + rect_height); i++){
-
-          array[i*cols+k] = color;
-
-          if(rect_width>0){
-          for (k = x; k < (x + rect_width); k++){
-            if( i == y || i == (y+rect_height)){
-              array[i*cols+k] = color;
-              }
-            }
-          }
-
-          else if(rect_width<0){
-            for (k = x; k > (rect_width-x); k--){
-              if( i == y || i == (rect_height-y)){
-                array[i*cols+k] = color;
-              }
-            }
-          }
-
-
-          array[i*cols+k] = color;
-
-          k=x;
-        }
-
-      }
-
-
-      /*for(i = y; i<=(y + rect_height); i++){
+     if(rect_height > 0 && rect_width > 0 ){
+      for(i = y; i<=(y + rect_height); i++){
 
         array[i*cols+k] = color;
 
@@ -551,22 +505,12 @@ void draw_rectangle( uint8_t array[],
         array[i*cols+k] = color;
 
         k=x;
-      }*/
+      }
+    }
 
 
 
-}
-
-
-  /*for(i = 0; i < cols*rows; i++){
-      if((i%rows) >= left && ((i%rows) < right)
-          &&  // Checks if it's within x-bounds
-         (i/cols) >= top  && (i/cols)<bottom )
-         { //Checks if it's within y-bounds
-           array[i] = color;
-         }
-       }
-    }*/
+}*/
 
     // your code here
 
