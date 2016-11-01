@@ -95,24 +95,61 @@ int main( int argc, char* argv[] )
   int goofyNumber = min(img, imgwidth, imgheight);
   printf("%d \n", goofyNumber); */
 
-  //int arrJuan[20] = {};
+  const uint8_t arrJuan[35] = {0  ,255,0  ,0  ,0  ,0  ,0,
+                               0  ,0  ,255,0  ,0  ,0  ,0,
+                               255,255,255,0  ,0  ,0  ,0,
+                               0  ,0  ,0  ,0  ,0  ,0  ,0,
+                               0  ,0  ,0  ,0  ,0  ,0  ,0};
+  int sina = 0;
+for (sina = 0; sina < 50; sina++){
+     life(arrJuan, 7, 5);
+     draw_image_grey( arrJuan, 7, 5 );
+  }
 
-  draw_circle( img,
-           imgwidth,
-          imgheight,
-           imgwidth/2,
-           imgheight/2,
-           33,
-           4);
+/*  draw_circle( img,
+               imgwidth,
+               imgheight,
+               imgwidth/2,
+               imgheight/2,
+               33,
+               4);
+*/
 
-/*  draw_rectangle( img,
+/*  region_set( img,
+              imgwidth,
+              imgheight,
+              20,
+              50,
+              150,
+              200,
+              74);
+
+*/
+
+ /*draw_rectangle( img,
            imgwidth,
           imgheight,
            imgwidth/2,
            imgheight/2,
            -50,
            -50,
-              0);
+            0);
+            draw_rectangle( img,
+                      imgwidth,
+                     imgheight,
+                      imgwidth/2,
+                      imgheight/2,
+                      -50,
+                      50,
+                       0);
+                       draw_rectangle( img,
+                                 imgwidth,
+                                imgheight,
+                                 imgwidth/2,
+                                 imgheight/2,
+                                 50,
+                                 -50,
+                                  0);
   draw_rectangle( img,
                   imgwidth,
                  imgheight,
@@ -120,12 +157,12 @@ int main( int argc, char* argv[] )
               imgheight/2,
              50,
             50,
-          0);*/
-
+          0);
+*/
 
   // draw the array as a grey-scale image in the window
   // This function returns after a user clicks or presses a button in the window
-  draw_image_grey( img, imgwidth, imgheight );
+  draw_image_grey( arrJuan, 7, 5 );
   // finalize the graphics system, freeing its resources
   draw_shutdown();
 
