@@ -1,3 +1,4 @@
+#include<stdint.h>
 void life( uint8_t array[],
            unsigned int cols,
            unsigned int rows ){
@@ -9,7 +10,8 @@ void life( uint8_t array[],
             int yMinusOne = 0;
             int xMinusOne = 0;
             int counter = 0;
-            int *tmpArr = malloc(cols*rows*sizeof(uint8_t));
+              //printArray(array, cols, rows);
+            //int *tmpArr = malloc(cols*rows*sizeof(uint8_t));
             for (y = 0; y<rows; y++){
                 for( x = 0; x<cols; x++){
                   if(array[y*cols +x] == 0){//it's dead
@@ -32,20 +34,20 @@ void life( uint8_t array[],
                       yMinusOne = rows-1;
                     }
                     //Checks all eight surrounding elements
-                    if(array[ (yPlusOne)* cols+ xMinusOne] != 0){ counter++; }
-                    if(array[ (yPlusOne)* cols+ x]         != 0){ counter++; }
-                    if(array[ (yPlusOne)* cols+ xPlusOne]  != 0){ counter++; }
-                    if(array[  y        * cols+ xMinusOne] != 0){ counter++; }
-                    if(array[  y        * cols+ xPlusOne]  != 0){ counter++; }
-                    if(array[(yMinusOne)* cols+ xMinusOne] != 0){ counter++; }
-                    if(array[(yMinusOne)* cols+ x]         != 0){ counter++; }
-                    if(array[(yMinusOne)* cols+ xPlusOne]  != 0){ counter++; }
+                    if(array[ (yPlusOne)* cols+ xMinusOne] > 1){ counter++; }
+                    if(array[ (yPlusOne)* cols+ x]         > 1){ counter++; }
+                    if(array[ (yPlusOne)* cols+ xPlusOne]  > 1){ counter++; }
+                    if(array[  y        * cols+ xMinusOne] > 1){ counter++; }
+                    if(array[  y        * cols+ xPlusOne]  > 1){ counter++; }
+                    if(array[(yMinusOne)* cols+ xMinusOne] > 1){ counter++; }
+                    if(array[(yMinusOne)* cols+ x]         > 1){ counter++; }
+                    if(array[(yMinusOne)* cols+ xPlusOne]  > 1){ counter++; }
                     //Now to see if it's born
                     if(counter == 3){
-                      tmpArr[y*cols +x] = 255;
+                      array[y*cols +x] = 1;//One means it's alive next turn, so for others it's effectively dead
                     }
                     else{
-                      tmpArr[y*cols +x] = 0;
+                      array[y*cols +x] = 0;
                     }
                     counter = 0; //reset the counter for the next element
                   }
@@ -67,30 +69,36 @@ void life( uint8_t array[],
                     }
                     if(y == 0){
                       yMinusOne = rows-1;
-                    }
+                  //printArray(array, cols, rows);    }
                     //Checks all eight surrounding elements
-                    if(array[ (yPlusOne)* cols+ xMinusOne] != 0){ counter++; }
-                    if(array[ (yPlusOne)* cols+ x]         != 0){ counter++; }
-                    if(array[ (yPlusOne)* cols+ xPlusOne]  != 0){ counter++; }
-                    if(array[  y        * cols+ xMinusOne] != 0){ counter++; }
-                    if(array[  y        * cols+ xPlusOne]  != 0){ counter++; }
-                    if(array[(yMinusOne)* cols+ xMinusOne] != 0){ counter++; }
-                    if(array[(yMinusOne)* cols+ x]         != 0){ counter++; }
-                    if(array[(yMinusOne)* cols+ xPlusOne]  != 0){ counter++; }
+                    if(array[ (yPlusOne)* cols+ xMinusOne] > 1){ counter++; }
+                    if(array[ (yPlusOne)* cols+ x]         > 1){ counter++; }
+                    if(array[ (yPlusOne)* cols+ xPlusOne]  > 1){ counter++; }
+                    if(array[  y        * cols+ xMinusOne] > 1){ counter++; }
+                    if(array[  y        * cols+ xPlusOne]  > 1){ counter++; }
+                    if(array[(yMinusOne)* cols+ xMinusOne] > 1){ counter++; }
+                    if(array[(yMinusOne)* cols+ x]         > 1){ counter++; }
+                    if(array[(yMinusOne)* cols+ xPlusOne]  > 1){ counter++; }
                     //Now to see if it dies
                     if(counter < 2 || counter > 3){
-                      tmpArr[y*cols +x] = 0;
+                      array[y*cols +x] = 3;//This means it's effectively alive
                     }
                     else{
-                      tmpArr[y*cols +x] = 255;
+                      array[y*cols +x] = 255;//4;
                     }
                     counter = 0;
                   }
                 }
             }
-          i = 0;
+            //printArray(array, cols, rows);
+          int i = 0;
           for(i = 0; i<cols*rows; i++){
-            array[i] = tmpArr[i];
+            if (array[i] == 1){
+              array[i]  = 255;//4;
+            }
+            if(array[i] == 3){
+              array[i] = 0;
+            }
           }
-          free(tmpArr);
+          //  printArray(array, cols, rows);
      }

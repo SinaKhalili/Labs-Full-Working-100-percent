@@ -1,3 +1,4 @@
+#include<stdint.h>
 void draw_circle( uint8_t img[],
                   unsigned int cols,
                   unsigned int rows,
