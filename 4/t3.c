@@ -69,6 +69,7 @@ void life( uint8_t array[],
                     }
                     if(y == 0){
                       yMinusOne = rows-1;
+                    }
                   //printArray(array, cols, rows);    }
                     //Checks all eight surrounding elements
                     if(array[ (yPlusOne)* cols+ xMinusOne] > 1){ counter++; }
