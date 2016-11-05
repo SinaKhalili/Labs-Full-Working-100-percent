@@ -8,9 +8,11 @@ void draw_rectangle( uint8_t array[],
 		          int rect_height,
 		          uint8_t color ){
       if (rect_height<0 && rect_width<0){
-        //printf("both negatives!\n");
+      //  printf("both negatives!\n");
+      //  printf("x used to be %d ", x);
         x += rect_width;
         y += rect_height;
+      //,  printf("and now its %d\n", x);
         draw_rectangle(array, cols, rows, x,y, abs(rect_width),abs(rect_height), color );
 
       }
@@ -27,26 +29,33 @@ void draw_rectangle( uint8_t array[],
       int i = y;
       int k = x;
 
-     if(rect_height > 0 && rect_width > 0 ){
+      if(rect_height > 0 && rect_width > 0 ){
       for(i = y; i<=(y + rect_height); i++){
 
-        array[i*cols+k] = color;
-
+        if(k>=0 && i>=0){
+          array[i*cols + x] = color;
+        }
 
         for (k = x; k < (x + rect_width); k++){
 
           if( i == y || i == (y+rect_height)){
 
-            array[i*cols+k] = color;
-
+            if(k>=0 && i>=0){
+              array[i*cols+k] = color;
+            }
           }
 
         }
 
 
-        array[i*cols+k] = color;
+        if(k>=0 && i>=0){
+          array[i*cols+k] = color;
+        }
 
         k=x;
       }
     }
+
+
+
 }
