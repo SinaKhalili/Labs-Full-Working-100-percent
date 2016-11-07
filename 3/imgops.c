@@ -374,6 +374,8 @@ void printArray( const uint8_t array[],
           printf("\n");
         }
       }
+      printf("\n");
+      printf("\n");
 
 }
 
@@ -457,7 +459,7 @@ void region_set( uint8_t array[],
           }
 
 }*/
-/*void draw_rectangle( uint8_t array[],
+void draw_rectangle( uint8_t array[],
 		          unsigned int cols,
 		          unsigned int rows,
 		          int x,
@@ -465,52 +467,65 @@ void region_set( uint8_t array[],
 		          int rect_width,
 		          int rect_height,
 		          uint8_t color ){
+
+      if(rect_width == 0 ||rect_height == 0){return;}
+
       if (rect_height<0 && rect_width<0){
-        //printf("both negatives!\n");
+        /*printf("both negatives!\n");
+        printf("x used to be %d ", x);*/
+        x++;
         x += rect_width;
+        y++;
         y += rect_height;
+        //printf("and now its %d\n", x);
         draw_rectangle(array, cols, rows, x,y, abs(rect_width),abs(rect_height), color );
+        return;
 
       }
       else if (rect_width<0 && rect_height>0){
         //printf("width negative!\n");
+        x++;
         x += rect_width;
         draw_rectangle(array, cols, rows, x,y, abs(rect_width),abs(rect_height), color );
+        return;
       }
       else if (rect_height<0 && rect_width>0){
         //printf("height negative!\n");
+        y++;
         y += rect_height;
         draw_rectangle(array, cols, rows, x,y, abs(rect_width),abs(rect_height), color );
+        return;
       }
       int i = y;
       int k = x;
 
-     if(rect_height > 0 && rect_width > 0 ){
-      for(i = y; i<=(y + rect_height); i++){
+      if(rect_height > 0 && rect_width > 0 ){
+      for(i = y; i<(y + rect_height); i++){
 
-        array[i*cols+k] = color;
+        if(k>=0 && i>=0 && i*cols + x){
+          array[i*cols + x] = color;
+        }
 
+        for (k = x; k <x+rect_width-1; k++){
 
-        for (k = x; k < (x + rect_width); k++){
+          if( i == y || i == (y+rect_height)-1){
 
-          if( i == y || i == (y+rect_height)){
-
-            array[i*cols+k] = color;
-
+            if(k>=0 && i>=0){
+              array[i*cols+k] = color;
+            }
           }
 
         }
 
 
-        array[i*cols+k] = color;
+        if(k>=0 && i>=0){
+          array[i*cols+k] = color;
+        }
 
         k=x;
       }
     }
-
-
-
-}*/
+}
 
     // your code here
 
@@ -551,6 +566,40 @@ unsigned long int region_integrate( const uint8_t array[],
 
   return sum;
 }
+void draw_circle( uint8_t img[],
+                  unsigned int cols,
+                  unsigned int rows,
+		              int x,
+		              int y,
+		              int r,
+		              uint8_t color ){
+
+          int a = 0;
+          int b = 0;
+          for (b = 0; b<rows; b++){
+            for(a = 0; a<cols; a++){
+              float Xdistance1 = (a-0.5)-(x);
+              float Xdistance2 = (a+0.5)-(x);
+              float Xdistance3 = (a-0.5)-(x);
+              float Xdistance4 = (a+0.5)-(x);
+              float Ydistance1 = (b+0.5)-(y);
+              float Ydistance2 = (b+0.5)-(y);
+              float Ydistance3 = (b-0.5)-(y);
+              float Ydistance4 = (b-0.5)-(y);
+              if(
+                  (Xdistance2*Xdistance2)+(Ydistance2*Ydistance2) < r*r ||
+                  (Xdistance1*Xdistance1)+(Ydistance1*Ydistance1) < r*r ||
+                  (Xdistance3*Xdistance3)+(Ydistance3*Ydistance3) < r*r ||
+                  (Xdistance4*Xdistance4)+(Ydistance4*Ydistance4) < r*r
+              ){
+                img[b*cols + a] = color;
+              }
+
+            }
+          }
+}
+
+
 
 
 
@@ -618,6 +667,7 @@ void life( uint8_t array[],
             int yMinusOne = 0;
             int xMinusOne = 0;
             int counter = 0;
+              //printArray(array, cols, rows);
             //int *tmpArr = malloc(cols*rows*sizeof(uint8_t));
             for (y = 0; y<rows; y++){
                 for( x = 0; x<cols; x++){
@@ -651,7 +701,7 @@ void life( uint8_t array[],
                     if(array[(yMinusOne)* cols+ xPlusOne]  > 1){ counter++; }
                     //Now to see if it's born
                     if(counter == 3){
-                      array[y*cols +x] = 1;//One means it's effectively dead
+                      array[y*cols +x] = 1;//One means it's alive next turn, so for others it's effectively dead
                     }
                     else{
                       array[y*cols +x] = 0;
@@ -676,34 +726,36 @@ void life( uint8_t array[],
                     }
                     if(y == 0){
                       yMinusOne = rows-1;
-                    }
+                        }
                     //Checks all eight surrounding elements
-                    if(array[ (yPlusOne)* cols+ xMinusOne] != 0){ counter++; }
-                    if(array[ (yPlusOne)* cols+ x]         != 0){ counter++; }
-                    if(array[ (yPlusOne)* cols+ xPlusOne]  != 0){ counter++; }
-                    if(array[  y        * cols+ xMinusOne] != 0){ counter++; }
-                    if(array[  y        * cols+ xPlusOne]  != 0){ counter++; }
-                    if(array[(yMinusOne)* cols+ xMinusOne] != 0){ counter++; }
-                    if(array[(yMinusOne)* cols+ x]         != 0){ counter++; }
-                    if(array[(yMinusOne)* cols+ xPlusOne]  != 0){ counter++; }
+                    if(array[ (yPlusOne)* cols+ xMinusOne] > 1){ counter++; }
+                    if(array[ (yPlusOne)* cols+ x]         > 1){ counter++; }
+                    if(array[ (yPlusOne)* cols+ xPlusOne]  > 1){ counter++; }
+                    if(array[  y        * cols+ xMinusOne] > 1){ counter++; }
+                    if(array[  y        * cols+ xPlusOne]  > 1){ counter++; }
+                    if(array[(yMinusOne)* cols+ xMinusOne] > 1){ counter++; }
+                    if(array[(yMinusOne)* cols+ x]         > 1){ counter++; }
+                    if(array[(yMinusOne)* cols+ xPlusOne]  > 1){ counter++; }
                     //Now to see if it dies
                     if(counter < 2 || counter > 3){
-                      array[y*cols +x] = 254;//This means it's effectively alive
+                      array[y*cols +x] = 3;//This means it's effectively alive
                     }
                     else{
-                      array[y*cols +x] = 255;
+                      array[y*cols +x] = 255;//4;
                     }
                     counter = 0;
                   }
                 }
             }
+            //printArray(array, cols, rows);
           int i = 0;
           for(i = 0; i<cols*rows; i++){
             if (array[i] == 1){
-              array[i]  = 255;
+              array[i]  = 255;//4;
             }
-            if(array[i] == 254){
+            if(array[i] == 3){
               array[i] = 0;
             }
           }
+          //  printArray(array, cols, rows);
      }

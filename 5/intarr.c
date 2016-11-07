@@ -1,10 +1,24 @@
-#include "intarr.h"
+//#include "intarr.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 // Create a new intarr_t with initial size len.  If successful
 // (i.e. memory allocation succeeds), returns a pointer to a
 // newly-allocated intarr_t.  If unsuccessful, returns a null pointer.
+/* Structure type that encapsulates our safe int array. */
+typedef struct {
+  int* data;
+  unsigned int len;
+} intarr_t;
+
+/* A type for returning status codes */
+typedef enum {
+  INTARR_OK,
+  INTARR_BADARRAY,
+  INTARR_BADINDEX,
+  INTARR_BADALLOC,
+  INTARR_NOTFOUND
+} intarr_result_t;
 
 intarr_t* intarr_create( unsigned int len ){
   intarr_t* swaggyP = malloc( sizeof(intarr_t));
@@ -115,7 +129,7 @@ intarr_result_t intarr_find( intarr_t* ia, int target, int* i ){
     return INTARR_BADARRAY;
   }
   int n = 0;
-  for(n; n< ia->len; n++){
+  for(n = 0; n< ia->len; n++){
     if(ia->data[n] == target){
       *i = n;
         return INTARR_OK;
@@ -134,56 +148,101 @@ intarr_result_t intarr_push( intarr_t* ia, int val ){
     return INTARR_BADARRAY;
   }
   int* newArray = malloc((ia->len+1)*sizeof(int));
+  if(!newArray){
+    return INTARR_BADALLOC;
+  }
   int k = 0;
-  for ( k; k<ia->len; k++){
+  for ( k =0; k<ia->len; k++){
     newArray[k] = ia->data[k];
   }
-  newArray[k+1] = val;
+  newArray[k] = val;
   int* tmpPtr;
   ia->len +=1;
   tmpPtr = ia->data;
   ia->data=newArray;
   free(tmpPtr);
+  return INTARR_OK;
 }
 
 // If the array is not empty, remove the value with the highest index
 // from the array, and, if i is non-null, set *i to the removed value,
 // then return INTARR_OK. If the array is empty, leave *i unmodified
 // and return INTARR_BADINDEX. If ia is null, return INTARR_BADARRAY.
-intarr_result_t intarr_pop( intarr_t* ia, int* i );
+intarr_result_t intarr_pop( intarr_t* ia, int* i ){
+
+  if(!ia){
+    return INTARR_BADARRAY;
+  }
+  if(ia->len < 0 || i == NULL){
+    return INTARR_BADINDEX;
+  }
+  int* newArray = malloc((ia->len-1)*sizeof(int));
+  int k = 0;
+  for ( k =0; k<ia->len-1; k++){
+    newArray[k] = ia->data[k];
+  }
+  *i = ia->data[k];
+  int* tmpPtr = ia->data;
+  ia->len -= 1;
+  ia->data=newArray;
+  free(tmpPtr);
+  return INTARR_OK;
+}
+
+// Resize ia to contain newlen values. If newlen is less than the
+// original array length, the end of the array is discarded. If newlen
+// is greater than the original array length, intialize all the new
+// integers to zero. If the allocation is successful, return
+// INTARR_OK, otherwise return INTARR_BADALLOC. If ia is null, return
+// INTARR_BADARRAY.
+intarr_result_t intarr_resize( intarr_t* ia, unsigned int newlen ){
+  if(!ia){
+    return INTARR_BADARRAY;
+  }
+  if(newlen > ia->len){
+    int i = 0;
+    for(i = 0; i<(newlen-(ia->len));i++){
+        if(intarr_push( ia, 0 ) == INTARR_BADALLOC){
+            return INTARR_BADALLOC;
+        }
+    }
+  }
+  if(newlen > ia->len){
+    int k = 0;
+    int i = 0;
+    for(i = 0; i<((ia->len)-newlen);i++){
+        if(intarr_pop( ia , &k ) == INTARR_BADALLOC){
+            return INTARR_BADALLOC;
+        }
+    }
+  }
+  return INTARR_OK;
+}
+// Get a deep copy of a portion of ia from index first to index last
+// inclusive. If successful, return a pointer to a newly-allocated
+// intarr_t containing a copy of the specfied section. If an error
+// occurs, i.e. ia is null, first or last are out of bounds, last <
+// first, or memory allocation fails, return a null pointer.
+intarr_t* intarr_copy_subarray( intarr_t* ia,
+				unsigned int first,
+				unsigned int last ){
+          return NULL;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 //REMEMBER TO fukin  DELETE THIS MAIN FUNCTION BEFORE HANDING IT IN!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-/*int main(){
-
-    intarr_t* test = intarr_create(4);
-
-    intarr_set(test, 0, 5);
-    intarr_set(test, 1, 4);
-    intarr_set(test, 2, 6);
-    intarr_set(test, 3, 7);
-    intarr_push(test, 500);
-
-
-    intarr_t* fergie = intarr_copy(test);
-
-    int number = 0; int i =0;
-    intarr_find(test, 7, &number);
-    printf("This number should be a three: %d \n", number);
-
-    intarr_get(test, 2, &i);
-    printf("This should be a six: %d\n", i );
-    for(i=0; i<fergie->len; i++){
-      printf("%d =: %d \n",i, *(fergie->data+i));
-    }
-    intarr_sort(fergie);
-    i = 0;
-    for(i=0; i<fergie->len; i++){
-      printf("%d =: %d \n",i, *(fergie->data+i));
-    }
-    printf("Here should be the number seven: %d \n", test->data[3]);
-    intarr_destroy(test);
-    return 0;
-
-}*/

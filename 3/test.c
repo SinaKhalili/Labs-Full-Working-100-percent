@@ -95,25 +95,69 @@ int main( int argc, char* argv[] )
   int goofyNumber = min(img, imgwidth, imgheight);
   printf("%d \n", goofyNumber); */
 
-  const uint8_t arrJuan[35] = {0  ,255,0  ,0  ,0  ,0  ,0,
-                               0  ,0  ,255,0  ,0  ,0  ,0,
-                               255,255,255,0  ,0  ,0  ,0,
-                               0  ,0  ,0  ,0  ,0  ,0  ,0,
-                               0  ,0  ,0  ,0  ,0  ,0  ,0};
-  int sina = 0;
-for (sina = 0; sina < 50; sina++){
+  const uint8_t arrJuan[225] ={0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+                               0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+                               0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+                               0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+                               0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+                               0,0,0,0,0,5,0,0,0,0,0,0,0,0,0,
+                               0,0,0,0,0,0,0,5,0,0,0,0,0,0,0,
+                               0,0,0,0,5,5,0,0,5,5,5,0,0,0,0,
+                               0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+                               0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+                               0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+                               0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+                               0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+                               0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+uint8_t arrJose[68598] = {};
+draw_rectangle( arrJose, 193,  96,  -49,    2,  -48,  -36,  5 ) ;
+printArray(arrJose, 193, 96);
+draw_image_grey( arrJose ,193,  96);
+
+//draw_rectangle( arrJuan, 15,  15,   3,   0,    -2,  4,  5 );
+//printArray(arrJuan,15,15);
+//draw_rectangle( arrJose, 193,  96,   10,   10,    5,    -5,  255 );
+/*draw_rectangle( arrJuan, 7, 7, 4, 3, 2, 3, 5);
+draw_rectangle( arrJuan, 7, 7, 4, 3, -2, -3, 5);
+draw_rectangle( arrJuan, 7, 7, 4, 3, 2, -3, 5);
+draw_rectangle( arrJuan, 7, 7, 4, 3, -  2, 3, 5);
+draw_rectangle( arrJuan, 15, 15, 7, 7, -5, -5, 128 );
+draw_rectangle( arrJose, 193,  96,   10,   10,    5,   -5,  5 );
+draw_rectangle( arrJuan, 15, 15, 7, 7, 5, 5, 255 );*/
+//draw_rectangle( arrJose, 206, 333,  277,  318,  110, -225,  207 );
+//draw_rectangle( arrJose, 193,  96,   256,  115,  -151,  -69,  213);
+//draw_rectangle( arrJose, 193,  96,  127,  -25,    5,   73,   173 );
+
+/*  int sina = 0;
+  draw_image_grey( arrJuan, 7, 5 );
+  for (sina = 0; sina < 10; sina++){
      life(arrJuan, 7, 5);
      draw_image_grey( arrJuan, 7, 5 );
-  }
+  }*/
+ /*int glider[][2] = { {1,0}, {2,1}, {0,2}, {1,2}, {2,2} };
 
-/*  draw_circle( img,
+  for( int i=0; i<5; i++ )
+    set_pixel( arrJose, 193, 96, glider[i][0], glider[i][1], 255 );
+
+  for( int i=0; i<100; i++ )
+    {
+      draw_image_grey( arrJuan, 15, 15 );
+      life( arrJuan, 15, 15 );
+    }
+*/
+//draw_image_grey( arrJose, 206, 333);
+  /*draw_circle( img,
                imgwidth,
                imgheight,
                imgwidth/2,
                imgheight/2,
                33,
-               4);
-*/
+               4);*/
+
+      /*for( int i=10; i>0; i-- )
+                  draw_circle( img, imgwidth, imgheight, imgwidth/2, imgheight/2, 2*i, 200/i+55);*/
+
+
 
 /*  region_set( img,
               imgwidth,
@@ -162,7 +206,6 @@ for (sina = 0; sina < 50; sina++){
 
   // draw the array as a grey-scale image in the window
   // This function returns after a user clicks or presses a button in the window
-  draw_image_grey( arrJuan, 7, 5 );
   // finalize the graphics system, freeing its resources
   draw_shutdown();
 
