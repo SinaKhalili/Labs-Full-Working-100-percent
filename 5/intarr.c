@@ -1,24 +1,7 @@
-//#include "intarr.h"
+#include "intarr.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-// Create a new intarr_t with initial size len.  If successful
-// (i.e. memory allocation succeeds), returns a pointer to a
-// newly-allocated intarr_t.  If unsuccessful, returns a null pointer.
-/* Structure type that encapsulates our safe int array. */
-typedef struct {
-  int* data;
-  unsigned int len;
-} intarr_t;
-
-/* A type for returning status codes */
-typedef enum {
-  INTARR_OK,
-  INTARR_BADARRAY,
-  INTARR_BADINDEX,
-  INTARR_BADALLOC,
-  INTARR_NOTFOUND
-} intarr_result_t;
 
 intarr_t* intarr_create( unsigned int len ){
   intarr_t* swaggyP = malloc( sizeof(intarr_t));
@@ -161,6 +144,7 @@ intarr_result_t intarr_push( intarr_t* ia, int val ){
   tmpPtr = ia->data;
   ia->data=newArray;
   free(tmpPtr);
+  //printf("I just pushed a zero into the array, boss. \n");
   return INTARR_OK;
 }
 
@@ -186,6 +170,7 @@ intarr_result_t intarr_pop( intarr_t* ia, int* i ){
   ia->len -= 1;
   ia->data=newArray;
   free(tmpPtr);
+  //printf("I just popped a molly fam. \n");
   return INTARR_OK;
 }
 
@@ -199,18 +184,23 @@ intarr_result_t intarr_resize( intarr_t* ia, unsigned int newlen ){
   if(!ia){
     return INTARR_BADARRAY;
   }
+  int difference = newlen - ia->len; 
+
+  //printf("The difference is %d ! \n", difference);
+
   if(newlen > ia->len){
     int i = 0;
-    for(i = 0; i<(newlen-(ia->len));i++){
+    for(i = 0; i< difference;i++){
         if(intarr_push( ia, 0 ) == INTARR_BADALLOC){
+          //printf("I just pushed a zero into the array, boss. \n");
             return INTARR_BADALLOC;
         }
     }
   }
-  if(newlen > ia->len){
+  if(difference<0){
     int k = 0;
     int i = 0;
-    for(i = 0; i<((ia->len)-newlen);i++){
+    for(i = 0; i<=((ia->len)-newlen);i++){
         if(intarr_pop( ia , &k ) == INTARR_BADALLOC){
             return INTARR_BADALLOC;
         }
@@ -226,23 +216,23 @@ intarr_result_t intarr_resize( intarr_t* ia, unsigned int newlen ){
 intarr_t* intarr_copy_subarray( intarr_t* ia,
 				unsigned int first,
 				unsigned int last ){
-          return NULL;
+        int difference = last - first + 1; 
+        if(!ia || 
+          (first<0) || 
+          (last > ia->len -1) || 
+          (last < first)){
+
+          return NULL; 
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//REMEMBER TO fukin  DELETE THIS MAIN FUNCTION BEFORE HANDING IT IN!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        intarr_t* RipStick = malloc ( sizeof(intarr_t)); 
+        RipStick->data = malloc(difference*sizeof(int)); 
+        int i = first;
+        int k = 0; 
+        for ( i = first; i <= last; i++){
+          RipStick->data[k] = ia->data[i];
+          k++; 
+        }
+        RipStick->len = difference; 
+        //printf("Copied the subarray boss! \n");
+        return RipStick;
+        }
