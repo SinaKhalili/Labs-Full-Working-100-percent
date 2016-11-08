@@ -157,7 +157,8 @@ intarr_result_t intarr_pop( intarr_t* ia, int* i ){
   if(!ia){
     return INTARR_BADARRAY;
   }
-  if(ia->len < 0 || i == NULL){
+  if(ia->len <= 0 ){
+    //|| i == NULL){
     return INTARR_BADINDEX;
   }
   int* newArray = malloc((ia->len-1)*sizeof(int));
@@ -168,6 +169,7 @@ intarr_result_t intarr_pop( intarr_t* ia, int* i ){
   *i = ia->data[k];
   int* tmpPtr = ia->data;
   ia->len -= 1;
+  //printf("I just popped a molly, the length is now : %d \n", ia->len );
   ia->data=newArray;
   free(tmpPtr);
   //printf("I just popped a molly fam. \n");
@@ -200,12 +202,17 @@ intarr_result_t intarr_resize( intarr_t* ia, unsigned int newlen ){
   if(difference<0){
     int k = 0;
     int i = 0;
-    for(i = 0; i<=((ia->len)-newlen);i++){
+      //printf("The difference is CLEARLY : %d \n", ia->len - newlen );
+      int swejft = ia->len - newlen;
+
+    for(i = 0; i<swejft;i++){
+       // printf("So I'm going to run this for the %d \n",i);
         if(intarr_pop( ia , &k ) == INTARR_BADALLOC){
             return INTARR_BADALLOC;
         }
     }
   }
+    //printf("Hoppin out length is now : %d ", ia->len );
   return INTARR_OK;
 }
 // Get a deep copy of a portion of ia from index first to index last
