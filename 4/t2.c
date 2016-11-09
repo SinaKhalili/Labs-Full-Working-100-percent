@@ -1,12 +1,13 @@
 #include<stdint.h>
+
 void draw_rectangle( uint8_t array[],
-		          unsigned int cols,
-		          unsigned int rows,
-		          int x,
-		          int y,
-		          int rect_width,
-		          int rect_height,
-		          uint8_t color ){
+              unsigned int cols,
+              unsigned int rows,
+              int x,
+              int y,
+              int rect_width,
+              int rect_height,
+              uint8_t color ){
 
       if(rect_width == 0 ||rect_height == 0){return;}
 
@@ -41,28 +42,32 @@ void draw_rectangle( uint8_t array[],
 
       if(rect_height > 0 && rect_width > 0 ){
       for(i = y; i<(y + rect_height); i++){
-
-        if(k>=0 && i>=0){
-          array[i*cols + x] = color;
+        if( k < cols )
+        { 
+          if( i < rows ){
+            array[ i * cols + k ] = color;
+          }
         }
+
+
 
         for (k = x; k <x+rect_width-1; k++){
-
           if( i == y || i == (y+rect_height)-1){
-
-            if(k>=0 && i>=0){
-              array[i*cols+k] = color;
-            }
-          }
-
+            if( k < cols )
+             { 
+               if( i < rows ){
+                 array[ i * cols + k ] = color;
+               }
+             }
+               }
+             }
+             if( k < cols )
+             { 
+               if( i < rows ){
+                 array[ i * cols + k ] = color;
+               }
         }
-
-
-        if(k>=0 && i>=0){
-          array[i*cols+k] = color;
-        }
-
-        k=x;
+      k=x;
       }
     }
 }
