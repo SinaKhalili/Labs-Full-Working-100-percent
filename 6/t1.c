@@ -15,12 +15,18 @@
 */
 int intarr_save_binary( intarr_t* ia, const char* filename ){
 
-  FILE* fs;
   if(!ia){
     return 1;
   }
   if(!(ia->data)){
     return 1;
+  }
+
+  FILE* fs = fopen(filename, "w");
+
+  if(ia->len == 0){
+    fclose(fs);
+    return 0;
   }
 
   fs = fopen(filename, "w");
