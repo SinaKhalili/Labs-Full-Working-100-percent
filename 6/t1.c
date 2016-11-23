@@ -29,7 +29,7 @@ int intarr_save_binary( intarr_t* ia, const char* filename ){
     return 0;
   }
 
-  fs = fopen(filename, "w");
+  //fs = fopen(filename, "w");
 
   if(!fs){
     return 1;
@@ -63,6 +63,9 @@ intarr_t* intarr_load_binary( const char* filename ){
 
 
 	FILE * fs = fopen(filename, "r");
+	if(fs == NULL){
+		return NULL; 
+	}
 
   fread(&(Hello->len),sizeof(unsigned int),1,fs);
 
