@@ -34,10 +34,12 @@ int intarr_save_json( intarr_t* ia, const char* filename ){
   //fwrite(&(ia->len),sizeof(char),1,fs);
   int i = 0;
   fprintf(fs, "[");
-  for(i=0; i<ia->len-1; i++){
-    fprintf(fs, " %d,",ia->data[i]);
+  if(ia->len > 0){
+    for(i=0; i<ia->len-1; i++){
+      fprintf(fs, " %d,",ia->data[i]);
+    }
+    fprintf(fs, " %d", ia->data[i]);
   }
-  fprintf(fs, " %d", ia->data[i]);
   fprintf(fs, " ]");
   fclose(fs);
   return 0;
