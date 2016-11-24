@@ -12,7 +12,7 @@
  ** Global Precondition **
 
  Functions that operate on an existing list require a valid pointer to
- a list_t header as their first argument. 
+ a list_t header as their first argument.
 */
 
 #include "list.h"
@@ -36,13 +36,16 @@ void list_destroy( list_t* list )
       element_t* next = el->next;
       free( el );
       el = next;
-    }      
-  
+    }
+
   free( list );
 }
 
 element_t* element_create( int i )
 {
+  //make this return NULL
+  //but how?
+
   element_t* el = malloc( sizeof(element_t) );
   if( el )
     {
@@ -55,13 +58,13 @@ element_t* element_create( int i )
 int list_append( list_t* list, int i )
 {
   element_t* el = element_create( i );
-  
+
   if( list->head == NULL )
     list->head = el;
-  
+
   if( list->tail )
     list->tail->next = el;
-  
+
   list->tail = el;
 
   return 0;
@@ -70,15 +73,16 @@ int list_append( list_t* list, int i )
 int list_prepend( list_t* list, int i )
 {
   element_t* el = element_create( i );
+  //doesn't check el
 
   if( list->tail == NULL )
     list->tail = el;
-  
+
   if( list->head )
     el->next = list->head;
 
   list->head = el;
-  
+
   return 0;
 }
 
@@ -86,7 +90,7 @@ element_t* list_index( list_t* list, unsigned int i )
 {
   element_t* el = list->head;
   unsigned int now = 0;
-  
+
   while( now < i )
     {
       if( el->next == NULL )
@@ -94,8 +98,8 @@ element_t* list_index( list_t* list, unsigned int i )
 
       now++;
       el = el->next;
-    }     
-  
+    }
+
   return el;
 }
 
@@ -103,7 +107,7 @@ element_t* list_index( list_t* list, unsigned int i )
 void list_print( list_t* list )
 {
   printf( "{" );
-  
+
   for( element_t* el = list->head;
        el;
        el = el->next )
