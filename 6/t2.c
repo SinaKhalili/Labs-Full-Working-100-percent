@@ -61,11 +61,12 @@ intarr_t* intarr_load_json( const char* filename ){
   if(!fs){
     return NULL;
   }
-
-  intarr_resize(ia, 0);
   int j = 0;
   char number[16];
-  memset(number, 0, 16*sizeof(char));
+  int q = 0;
+  for(q = 0; q < 16; q++){
+    number[q] = 0;
+  };
   int character = fgetc(fs);
 
   while(character != EOF){
@@ -81,7 +82,9 @@ intarr_t* intarr_load_json( const char* filename ){
         int numberAdded = atoi(number);
       //  printf("I just added %d \n", numberAdded );
         intarr_push(ia, numberAdded);
-        memset(number, 0, 16*sizeof(char));
+        for(q = 0; q < 16; q++){
+          number[q] = 0;
+        };
         j = 0;
       }
     }
