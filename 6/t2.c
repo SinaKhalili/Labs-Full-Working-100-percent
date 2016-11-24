@@ -27,6 +27,9 @@
   ]
 */
 int intarr_save_json( intarr_t* ia, const char* filename ){
+  if(!ia){
+    return 1; 
+  }
   FILE * fs = fopen(filename, "w");
   if(!fs){
     return 1;
@@ -53,6 +56,9 @@ int intarr_save_json( intarr_t* ia, const char* filename ){
   success (even if that array has length 0), or NULL on failure.
 */
 intarr_t* intarr_load_json( const char* filename ){
+  if(filename==NULL){
+    return NULL;
+  }
   intarr_t* ia = intarr_create(0);
   if(!ia){
     return NULL;
