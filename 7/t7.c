@@ -9,6 +9,12 @@
 list_t* list_create( void )
 {
   return malloc( sizeof(list_t) );
+  if( l )
+    {
+      l->head = NULL;
+      l->tail = NULL;
+    }
+  return l;
 }
 
 void list_destroy( list_t* list )
