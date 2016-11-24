@@ -8,7 +8,7 @@
 
 list_t* list_create( void )
 {
-  return malloc( sizeof(list_t) );
+  list_t* l = malloc( sizeof(list_t) );
   if( l )
     {
       l->head = NULL;
