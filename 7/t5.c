@@ -19,7 +19,7 @@
 
 list_t* list_create( void )
 {
-  return malloc( sizeof(list_t) );
+    return malloc( sizeof(list_t) );
 }
 
 void list_destroy( list_t* list )
@@ -30,8 +30,8 @@ void list_destroy( list_t* list )
       element_t* next = el->next;
       free( el );
       el = next;
-    }      
-  
+    }
+
   free( list );
 }
 
@@ -51,10 +51,10 @@ int list_append( list_t* list, int i )
   element_t* el = element_create( i );
   if( el == NULL )
     return 1;
- 
+
   if( list->head == NULL )
     list->head = el;
-  
+
   if( list->tail )
     list->tail->next = el;
 
@@ -70,12 +70,12 @@ int list_prepend( list_t* list, int i )
 
   if( list->tail == NULL )
     list->tail = el;
-  
+
   if( list->head )
     el->next = list->head;
 
   list->head = el;
-  
+
   return 0;
 }
 
@@ -83,10 +83,10 @@ element_t* list_index( list_t* list, unsigned int i )
 {
   if( list->head == NULL )
     return NULL;
-  
+
   element_t* el = list->head;
   unsigned int now = 0;
-  
+
   while( now < i )
     {
       if( el->next == NULL )
@@ -94,15 +94,15 @@ element_t* list_index( list_t* list, unsigned int i )
 
       now++;
       el = el->next;
-    }     
-  
+    }
+
   return el;
 }
 
 void list_print( list_t* list )
 {
   printf( "{" );
-  
+
   for( element_t* el = list->head;
        el;
        el = el->next )
@@ -110,4 +110,3 @@ void list_print( list_t* list )
 
   printf( " }\n" );
 }
-
