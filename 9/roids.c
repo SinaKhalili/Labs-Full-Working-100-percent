@@ -17,7 +17,7 @@
 // gameplay parameters
 
 const double SHIP_SIZE = 0.05;
-const double SHIP_SPIN_SPEED = 0.1; 
+const double SHIP_SPIN_SPEED = 0.1;
 const double SHIP_THRUST = 0.0003; // acceleration on the ship when thrusting
 const double SHOT_THRUST = 5e-5; // acceleration a shot imparts on roids it hits
 const double SHOT_LIFETIME = 80; // shot moves this many steps before being deleted
@@ -71,7 +71,7 @@ typedef struct {
 
 // GLOBAL VARIABLES
 
-// The player's ship. 
+// The player's ship.
 ship_t ship;
 
 roid_t* roids = NULL; // array of asteroids that currently exist
@@ -79,7 +79,7 @@ size_t numroids = 0; // length of array
 
 shot_t* shots = NULL; // array of shots that currently exist
 size_t numshots = 0; // length of array
- 
+
 int paused = 0; // while non-zero, nothing is updated
 
 
@@ -93,7 +93,7 @@ ship_t ship_create()
   ship.y = 0.5;
   ship.a = M_PI/2.0; // heading
   ship.dx = 0; // speed
-  ship.dy = 0; 
+  ship.dy = 0;
   ship.da = 0.0;
   ship.thrust = 0; // ship is not thrusting
 
@@ -112,7 +112,7 @@ void ship_update( ship_t* ship )
   ship->a += ship->da;
 
   ship->dx += ship->thrust * SHIP_THRUST * cos(ship->a);
-  ship->dy += ship->thrust * SHIP_THRUST * sin(ship->a);      
+  ship->dy += ship->thrust * SHIP_THRUST * sin(ship->a);
 
   ship->x = fmod( ship->x + 1.0, 1.0 );
   ship->y = fmod( ship->y + 1.0, 1.0 );
@@ -126,13 +126,13 @@ void ship_draw( const ship_t* ship )
 
   float dx = ship->size * cos( ship->a );
   float dy = ship->size * sin( ship->a );
-     
+
   float lx = ship->size/2.0 * cos( fmod( ship->a + 2.2, 2.0*M_PI) );
   float ly = ship->size/2.0 * sin( fmod( ship->a + 2.2, 2.0*M_PI) );
 
   float rx = ship->size/2.0 * cos( fmod( ship->a - 2.2, 2.0*M_PI) );
   float ry = ship->size/2.0 * sin( fmod( ship->a - 2.2, 2.0*M_PI) );
-  
+
   draw_triangle( ship->x + dx, ship->y + dy,
 		 ship->x + lx, ship->y + ly,
 		 ship->x + rx, ship->y + ry,
@@ -143,11 +143,11 @@ void ship_draw( const ship_t* ship )
       draw_triangle( ship->x - dx, ship->y - dy,
 		     ship->x + lx, ship->y + ly,
 		     ship->x + rx, ship->y + ry,
-		     thrustcolor );                 
+		     thrustcolor );
     }
 
   /* TASK 3 */
-  /* TODO: 
+  /* TODO:
      more drawing so that the ship and its thrust jet appears to
      wrap around the 1x1 world correctly.
   */
@@ -197,7 +197,7 @@ void shot_update( shot_t* shot )
 /* Render the shot in the GUI */
 void shot_draw( const shot_t* shot )
 {
-  float color[4] = {1,1,1,1}; // white 
+  float color[4] = {1,1,1,1}; // white
   draw_point( shot->x, shot->y, color );
 }
 
@@ -206,10 +206,10 @@ void shot_draw( const shot_t* shot )
 void shots_harvest( void )
 {
   for( int i=0; i<numshots; i++ )
-    if( shots[i].lifetime == 0 ) 
+    if( shots[i].lifetime == 0 )
       {
 	// copy the last roid over the expired one
-	shots[i] = shots[--numshots];		  
+	shots[i] = shots[--numshots];
 	i--;
       }
 }
@@ -226,14 +226,14 @@ roid_t roid_create( void )
   roid.y = drand48();
   roid.dx = (drand48() * 2.0 * ROID_SPEED_MAX) - ROID_SPEED_MAX;
   roid.dy = (drand48() * 2.0 * ROID_SPEED_MAX) - ROID_SPEED_MAX;
-  
+
   // roid size is fixed
-  roid.width = ROID_SIZE * BRIGHT_COLOR_GOLDEN_RATIO; 
-  roid.height = ROID_SIZE; 
-  
+  roid.width = ROID_SIZE * BRIGHT_COLOR_GOLDEN_RATIO;
+  roid.height = ROID_SIZE;
+
   // this roid has not been shot yet
   roid.lifetime = ROID_LIFETIME;
-  
+
   // force one of the axes to have a zero coordinate
   // so the roid starts at the edge of the screen
   if( drand48() > 0.5 )
@@ -255,18 +255,18 @@ void roids_add( size_t num )
 
   roids = realloc( roids, numroids * sizeof(roid_t));
   for( int i=0; i<numroids; i++ )
-    roids[i] = roid_create();    
+    roids[i] = roid_create();
 }
 
 /* Update the position of a roid for one timestep,
    according to the current speeds, and wrapping around the toroidal
    world (which is 1x1 units across). */
-void roid_update( roid_t* roid ) 
+void roid_update( roid_t* roid )
 {
-  roid->x += roid->dx; 
-  roid->y += roid->dy;  
+  roid->x += roid->dx;
+  roid->y += roid->dy;
   roid->x = fmod( roid->x + 1.0, 1.0 );
-  roid->y = fmod( roid->y + 1.0, 1.0 );  
+  roid->y = fmod( roid->y + 1.0, 1.0 );
 }
 
 /* Split a roid along its longest axis into two equal halves. The
@@ -317,12 +317,12 @@ void roid_split( unsigned int index )
 void roid_draw( const roid_t* roid )
 {
   // draw a rectangle around centre of the roid.
-  draw_rectangle( roid->x-roid->width/2.0, roid->y-roid->height/2.0, 
+  draw_rectangle( roid->x-roid->width/2.0, roid->y-roid->height/2.0,
 		  roid->x+roid->width/2.0, roid->y+roid->height/2,
 		  roid->color );
 
   /* TASK 4 */
-  /* TODO: 
+  /* TODO:
      more drawing so that the roids appear to wrap around the
      1x1 world correctly.
   */
@@ -333,12 +333,12 @@ void roid_draw( const roid_t* roid )
 void roids_harvest( void )
 {
   for( int i=0; i<numroids; i++ )
-    if( roids[i].lifetime == 0  ) 
+    if( roids[i].lifetime == 0  )
       {
 	// copy the last roid over the expired one
 	roids[i] = roids[--numroids];
 	i--;
-      }  
+      }
 }
 
 // -- shots interactimg with roids -----------------------------------
@@ -352,7 +352,7 @@ int shot_roid_hit( const shot_t* shot, const roid_t* roid )
   /* TODO: modify this code so it takes into account the toroidal
      shape of the world.
    */
-  
+
   return( shot->x >= roid->x - roid->width/2 &&
 	  shot->x <= roid->x + roid->width/2 &&
 	  shot->y >= roid->y - roid->height/2 &&
@@ -378,13 +378,13 @@ void display(void)
   draw_clear( BACKGROUND_COLOR ); // clears window
 
   ship_draw( &ship );
-  
+
   for( int i=0; i<numroids; i++ )
     roid_draw( &roids[i] );
-  
+
   for( int i=0; i<numshots; i++ )
     shot_draw( &shots[i] );
-  
+
   draw_flush(); // finish all drawing right now
 }
 
@@ -393,11 +393,37 @@ void display(void)
 void key_down( unsigned char key, int x, int y )
 {
   /* TASK 1 */
-  /* TODO:
+  switch(key){
+    case 'z':
+      ship.da = SHIP_SPIN_SPEED;
+      break;
+    case 'x':
+      ship.da = -SHIP_SPIN_SPEED;
+      break;
+    case 'p':
+      if(paused == 0){
+        paused = 1;
+      }
+      else if (paused == 1){
+        paused = 0;
+      }
+      break;
+    case 'm':
+      ship.thrust = 1;
+      break;
+    case ' ':
+      shot_add();
+      break;
+
+  }
+
+  /* TODo:
+
+
      using a switch/case statement:
      if key is 'z', set ship rotation speed ship.da to SHIP_SPIN_SPEED
      if key is 'x', set ship rotation speed ship.da to -SHIP_SPIN_SPEED
-     if key is 'p', invert the truth value of paused 
+     if key is 'p', invert the truth value of paused
                     (ie. non-zero to zero, zero to non-zero)
      if key is 'm', set ship.thrust to 1.
 
@@ -410,7 +436,19 @@ void key_down( unsigned char key, int x, int y )
 void key_up( unsigned char key, int x, int y )
 {
   /* TASK 2 */
-  /* TODO:     
+
+  switch(key){
+    case 'z':
+      ship.da = 0;
+      break;
+    case 'x':
+      ship.da = 0;
+      break;
+    case 'm':
+      ship.thrust = 0;
+      break;
+  }
+  /* TODo:
      using a switch/case statement
      if key is 'z' or 'x', set ship rotation speed ship.da to zero.
      if key is 'm', set ship.thrust to zero.
@@ -431,10 +469,10 @@ int main(int argc, char** argv)
   ship = ship_create();
 
   size_t level = 0;
-  
+
   while( 1 )
     {
-      gui_handle_events(); // check for any action in the user interface      
+      gui_handle_events(); // check for any action in the user interface
 
       // if we are starting up or all the roids are gone, start a new level
       if( numroids == 0 )
@@ -443,43 +481,43 @@ int main(int argc, char** argv)
 	  printf( "LEVEL %lu\n", level );
 	  roids_add( level * ROIDS_PER_LEVEL ); // create new roids
 	}
-      
+
       if( ! paused )
-	{	  
+	{
 	  // check each roid for shot hits
 	  for( int j=0; j<numroids; j++ )
 	    {
 	      if( roids[j].lifetime == 0 ) // if roid has already taken enough hits, skip over it.
 		break;
-	      
+
 	      for( int i=0; i<numshots; i++ )
 		{
 		  if( shots[i].lifetime && shot_roid_hit( &shots[i], &roids[j] ))
 		    {
 		      roids[j].lifetime--;
 		      shots[i].lifetime = 0; // this shot is done
-		      
+
 		      // split roid into 2 smaller roids
-		      roid_split( j ); 
-		      
+		      roid_split( j );
+
 		      // momentum transfer from shot to both pieces
 		      shot_roid_push( &shots[i], &roids[j] );
 		      shot_roid_push( &shots[i], &roids[numroids-1] );
-		      		      
+
 		      break; // only one shot can impact a roid per update
 		    }
 		}
 	    }
-	    
+
 	  // now destroy all roids and shots with lifetime == 0
-	  roids_harvest();	    
+	  roids_harvest();
 	  shots_harvest();
 
-	  ship_update( &ship );	
+	  ship_update( &ship );
 
 	  for( int i=0; i<numshots; i++ )
 	    shot_update( &shots[i] );
-	  
+
 	  for( int i=0; i<numroids; i++ )
 	    roid_update( &roids[i] );
 
