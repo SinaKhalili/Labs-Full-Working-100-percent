@@ -410,13 +410,60 @@ void roid_split( unsigned int index )
    its right side visible at the left side of the world. */
 void roid_draw( const roid_t* roid )
 {
+  roid_t roid0 = *(roid);
+  roid0.x+=1;
+  roid_t roid1 = *(roid);
+  roid1.x+=1;
+  roid1.y+=1;
+  roid_t roid2 = *(roid);
+  roid2.y+=1;
+  roid_t roid3 = *(roid);
+  roid3.x-=1;
+  roid_t roid4 = *(roid);
+  roid4.x-=1;
+  roid4.y-=1;
+  roid_t roid5 = *(roid);
+  roid5.y-=1;
+  roid_t roid6 = *(roid);
+  roid6.x-=1;
+  roid6.y+=1;
+  roid_t roid7 = *(roid);
+  roid7.x+=1;
+  roid7.y-=1;
   // draw a rectangle around centre of the roid.
   draw_rectangle( roid->x-roid->width/2.0, roid->y-roid->height/2.0,
           roid->x+roid->width/2.0, roid->y+roid->height/2,
           roid->color );
+  draw_rectangle( roid0.x-roid0.width/2.0, roid0.y-roid0.height/2.0,
+          roid0.x+roid0.width/2.0, roid0.y+roid0.height/2,
+          roid0.color );
+  draw_rectangle( roid1.x-roid1.width/2.0, roid1.y-roid1.height/2.0,
+          roid1.x+roid1.width/2.0, roid1.y+roid1.height/2,
+          roid1.color );
+  draw_rectangle( roid2.x-roid2.width/2.0, roid2.y-roid2.height/2.0,
+          roid2.x+roid2.width/2.0, roid2.y+roid2.height/2,
+          roid2.color );
+  draw_rectangle( roid3.x-roid3.width/2.0, roid3.y-roid3.height/2.0,
+          roid3.x+roid3.width/2.0, roid3.y+roid3.height/2,
+          roid3.color );
+  draw_rectangle( roid4.x-roid4.width/2.0, roid4.y-roid4.height/2.0,
+          roid4.x+roid4.width/2.0, roid4.y+roid4.height/2,
+          roid4.color );
+  draw_rectangle( roid5.x-roid5.width/2.0, roid5.y-roid5.height/2.0,
+          roid5.x+roid5.width/2.0, roid5.y+roid5.height/2,
+          roid5.color );
+  draw_rectangle( roid6.x-roid6.width/2.0, roid6.y-roid6.height/2.0,
+          roid6.x+roid6.width/2.0, roid6.y+roid6.height/2,
+          roid6.color );
+  draw_rectangle( roid7.x-roid7.width/2.0, roid7.y-roid7.height/2.0,
+          roid7.x+roid7.width/2.0, roid7.y+roid7.height/2,
+          roid7.color );
+
 
   /* TASK 4 */
-  /* TODO:
+
+
+  /* TODo:
      more drawing so that the roids appear to wrap around the
      1x1 world correctly.
   */
