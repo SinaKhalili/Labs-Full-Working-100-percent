@@ -66,7 +66,7 @@ typedef struct {
   float dx; // shot movement in x per update step
   float dy; // shot movement in y per update step
   unsigned int lifetime; // when this counter reaches zero, shot is
-			 // deleted
+             // deleted
 } shot_t;
 
 // GLOBAL VARIABLES
@@ -154,45 +154,54 @@ void ship_draw( const ship_t* ship )
   float rx = ship->size/2.0 * cos( fmod( ship->a - 2.2, 2.0*M_PI) );
   float ry = ship->size/2.0 * sin( fmod( ship->a - 2.2, 2.0*M_PI) );
 
+    draw_triangle( ship->x + dx, ship->y + dy,
+           ship->x + lx, ship->y + ly,
+           ship->x + rx, ship->y + ry,
+           shipcolor );
   draw_triangle( ship0.x + dx, ship0.y + dy,
-		 ship0.x + lx, ship0.y + ly,
-		 ship0.x + rx, ship0.y + ry,
-		 shipcolor );
+         ship0.x + lx, ship0.y + ly,
+         ship0.x + rx, ship0.y + ry,
+         shipcolor );
      draw_triangle( ship1.x + dx, ship1.y + dy,
-   		 ship1.x + lx, ship1.y + ly,
-   		 ship1.x + rx, ship1.y + ry,
-   		 shipcolor );
+         ship1.x + lx, ship1.y + ly,
+         ship1.x + rx, ship1.y + ry,
+         shipcolor );
        draw_triangle( ship2.x + dx, ship2.y + dy,
-       		 ship2.x + lx, ship2.y + ly,
-       		 ship2.x + rx, ship2.y + ry,
-       		 shipcolor );
+             ship2.x + lx, ship2.y + ly,
+             ship2.x + rx, ship2.y + ry,
+             shipcolor );
            draw_triangle( ship3.x + dx, ship3.y + dy,
-           		 ship3.x + lx, ship3.y + ly,
-           		 ship3.x + rx, ship3.y + ry,
-           		 shipcolor );
+                 ship3.x + lx, ship3.y + ly,
+                 ship3.x + rx, ship3.y + ry,
+                 shipcolor );
                draw_triangle( ship4.x + dx, ship4.y + dy,
-               		 ship4.x + lx, ship4.y + ly,
-               		 ship4.x + rx, ship4.y + ry,
-               		 shipcolor );
+                     ship4.x + lx, ship4.y + ly,
+                     ship4.x + rx, ship4.y + ry,
+                     shipcolor );
                    draw_triangle( ship5.x + dx, ship5.y + dy,
-                   		 ship5.x + lx, ship5.y + ly,
-                   		 ship5.x + rx, ship5.y + ry,
-                   		 shipcolor );
+                         ship5.x + lx, ship5.y + ly,
+                         ship5.x + rx, ship5.y + ry,
+                         shipcolor );
                        draw_triangle( ship6.x + dx, ship6.y + dy,
-                       		 ship6.x + lx, ship6.y + ly,
-                       		 ship6.x + rx, ship6.y + ry,
-                       		 shipcolor );
+                             ship6.x + lx, ship6.y + ly,
+                             ship6.x + rx, ship6.y + ry,
+                             shipcolor );
                            draw_triangle( ship7.x + dx, ship7.y + dy,
-                           		 ship7.x + lx, ship7.y + ly,
-                           		 ship7.x + rx, ship7.y + ry,
-                           		 shipcolor );
+                                 ship7.x + lx, ship7.y + ly,
+                                 ship7.x + rx, ship7.y + ry,
+                                 shipcolor );
 
   draw_triangle( ship->x + dx, ship->y + dy,
-   		 ship->x + lx, ship->y + ly,
-   		 ship->x + rx, ship->y + ry,
-   		 shipcolor );
+         ship->x + lx, ship->y + ly,
+         ship->x + rx, ship->y + ry,
+         shipcolor );
   if( ship->thrust )
     {
+
+            draw_triangle( ship->x - dx, ship->y - dy,
+                   ship->x + lx, ship->y + ly,
+                   ship->x + rx, ship->y + ry,
+                   thrustcolor );
       draw_triangle( ship0.x - dx, ship0.y - dy,
          ship0.x + lx, ship0.y + ly,
          ship0.x + rx, ship0.y + ry,
@@ -227,10 +236,6 @@ void ship_draw( const ship_t* ship )
                               ship7.x + rx, ship7.y + ry,
                               thrustcolor );
 
-      draw_triangle( ship->x - dx, ship->y - dy,
-		     ship->x + lx, ship->y + ly,
-		     ship->x + rx, ship->y + ry,
-		     thrustcolor );
     }
 
 
@@ -297,9 +302,9 @@ void shots_harvest( void )
   for( int i=0; i<numshots; i++ )
     if( shots[i].lifetime == 0 )
       {
-	// copy the last roid over the expired one
-	shots[i] = shots[--numshots];
-	i--;
+    // copy the last roid over the expired one
+    shots[i] = shots[--numshots];
+    i--;
       }
 }
 
@@ -407,8 +412,8 @@ void roid_draw( const roid_t* roid )
 {
   // draw a rectangle around centre of the roid.
   draw_rectangle( roid->x-roid->width/2.0, roid->y-roid->height/2.0,
-		  roid->x+roid->width/2.0, roid->y+roid->height/2,
-		  roid->color );
+          roid->x+roid->width/2.0, roid->y+roid->height/2,
+          roid->color );
 
   /* TASK 4 */
   /* TODO:
@@ -424,9 +429,9 @@ void roids_harvest( void )
   for( int i=0; i<numroids; i++ )
     if( roids[i].lifetime == 0  )
       {
-	// copy the last roid over the expired one
-	roids[i] = roids[--numroids];
-	i--;
+    // copy the last roid over the expired one
+    roids[i] = roids[--numroids];
+    i--;
       }
 }
 
@@ -443,9 +448,9 @@ int shot_roid_hit( const shot_t* shot, const roid_t* roid )
    */
 
   return( shot->x >= roid->x - roid->width/2 &&
-	  shot->x <= roid->x + roid->width/2 &&
-	  shot->y >= roid->y - roid->height/2 &&
-	  shot->y <= roid->y + roid->height/2 );
+      shot->x <= roid->x + roid->width/2 &&
+      shot->y >= roid->y - roid->height/2 &&
+      shot->y <= roid->y + roid->height/2 );
 
 }
 
@@ -565,54 +570,54 @@ int main(int argc, char** argv)
 
       // if we are starting up or all the roids are gone, start a new level
       if( numroids == 0 )
-	{
-	  level++;
-	  printf( "LEVEL %lu\n", level );
-	  roids_add( level * ROIDS_PER_LEVEL ); // create new roids
-	}
+    {
+      level++;
+      printf( "LEVEL %lu\n", level );
+      roids_add( level * ROIDS_PER_LEVEL ); // create new roids
+    }
 
       if( ! paused )
-	{
-	  // check each roid for shot hits
-	  for( int j=0; j<numroids; j++ )
-	    {
-	      if( roids[j].lifetime == 0 ) // if roid has already taken enough hits, skip over it.
-		break;
+    {
+      // check each roid for shot hits
+      for( int j=0; j<numroids; j++ )
+        {
+          if( roids[j].lifetime == 0 ) // if roid has already taken enough hits, skip over it.
+        break;
 
-	      for( int i=0; i<numshots; i++ )
-		{
-		  if( shots[i].lifetime && shot_roid_hit( &shots[i], &roids[j] ))
-		    {
-		      roids[j].lifetime--;
-		      shots[i].lifetime = 0; // this shot is done
+          for( int i=0; i<numshots; i++ )
+        {
+          if( shots[i].lifetime && shot_roid_hit( &shots[i], &roids[j] ))
+            {
+              roids[j].lifetime--;
+              shots[i].lifetime = 0; // this shot is done
 
-		      // split roid into 2 smaller roids
-		      roid_split( j );
+              // split roid into 2 smaller roids
+              roid_split( j );
 
-		      // momentum transfer from shot to both pieces
-		      shot_roid_push( &shots[i], &roids[j] );
-		      shot_roid_push( &shots[i], &roids[numroids-1] );
+              // momentum transfer from shot to both pieces
+              shot_roid_push( &shots[i], &roids[j] );
+              shot_roid_push( &shots[i], &roids[numroids-1] );
 
-		      break; // only one shot can impact a roid per update
-		    }
-		}
-	    }
+              break; // only one shot can impact a roid per update
+            }
+        }
+        }
 
-	  // now destroy all roids and shots with lifetime == 0
-	  roids_harvest();
-	  shots_harvest();
+      // now destroy all roids and shots with lifetime == 0
+      roids_harvest();
+      shots_harvest();
 
-	  ship_update( &ship );
+      ship_update( &ship );
 
-	  for( int i=0; i<numshots; i++ )
-	    shot_update( &shots[i] );
+      for( int i=0; i<numshots; i++ )
+        shot_update( &shots[i] );
 
-	  for( int i=0; i<numroids; i++ )
-	    roid_update( &roids[i] );
+      for( int i=0; i<numroids; i++ )
+        roid_update( &roids[i] );
 
-	  // ask the GUI to redraw the window when it's ready to do so.
-	  gui_redraw();
-	}
+      // ask the GUI to redraw the window when it's ready to do so.
+      gui_redraw();
+    }
 
       usleep( SLEEP_USEC ); // slow things down for humans
     }
