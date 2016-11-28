@@ -83,7 +83,10 @@ int Image::save( const char* filename ){
     return 1;
   }
   if(this->pixels == NULL){
-    return 1;
+    int len = 0;
+    fwrite(&len, sizeof(int), 1, fs);
+    fclose(fs);
+    return 0;
   }
   int len = this->cols * this->rows;
   int colser = this->cols;
@@ -114,6 +117,13 @@ int Image::load( const char* filename ){
   int colsy = 0;
   int rowsy = 0;
   fread(&leny, sizeof(int), 1, fs);
+  if(leny == 0){
+    this->pixels = NULL;
+    this->cols = 0;
+    this->rows = 0;
+    fclose(fs);
+    return 0; 
+  }
   fread(&rowsy, sizeof(int), 1, fs);
   fread(&colsy, sizeof(int), 1, fs);
 
