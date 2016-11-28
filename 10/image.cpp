@@ -54,6 +54,9 @@ int Image::set_pixel( unsigned int x, unsigned int y, uint8_t color )
    by colorp. Returns 0 on success, else a non-zero error code. */
 int Image::get_pixel( unsigned int x, unsigned int y, uint8_t* colorp )
 {
+  if(!colorp){
+    return 1;
+  }
   if(x >= this->cols)
   {
     colorp = NULL;
@@ -61,7 +64,7 @@ int Image::get_pixel( unsigned int x, unsigned int y, uint8_t* colorp )
   }
   if(y >= this->rows)
   {
-    colorp = NULL; 
+    colorp = NULL;
     return 1;
   }
   *colorp = this->pixels[y*this->cols + x];
